@@ -1,5 +1,6 @@
 <script>
 import Header from "@/components/Header.vue"
+import "./design/App.scss"
 
 export default {
   data: function () {
@@ -17,8 +18,4 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
-#main-container {
-  margin: 2rem;
-}
-</style>
+<style lang="scss"></style>
