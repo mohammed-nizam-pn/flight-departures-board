@@ -2,4 +2,11 @@
 
 <template><h1>Hello World!</h1></template>
 
-<style></style>
+<style lang="scss">
+h1 {
+  color: red;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+</style>
