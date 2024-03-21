@@ -1,9 +1,16 @@
-<script></script>
+<script>
+import Header from "@/components/Header.vue"
 
-<template><h1>Hello World!</h1></template>
-
-<style lang="scss">
-h1 {
-  padding: 10px;
+export default {
+  data: function () {
+    return {}
+  },
+  components: {
+    appHeader: Header,
+  },
 }
-</style>
+</script>
+
+<template><appHeader></appHeader></template>
+
+<style lang="scss"></style>
