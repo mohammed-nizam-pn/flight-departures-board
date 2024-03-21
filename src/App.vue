@@ -11,6 +11,14 @@ export default {
 }
 </script>
 
-<template><appHeader></appHeader></template>
+<template>
+  <div id="main-container">
+    <appHeader></appHeader>
+  </div>
+</template>
 
-<style lang="scss"></style>
+<style lang="scss">
+#main-container {
+  margin: 2rem;
+}
+</style>
