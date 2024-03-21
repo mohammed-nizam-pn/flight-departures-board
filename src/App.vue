@@ -4,9 +4,6 @@
 
 <style lang="scss">
 h1 {
-  color: red;
-  &:hover {
-    transform: scale(1.2);
-  }
+  padding: 10px;
 }
 </style>
