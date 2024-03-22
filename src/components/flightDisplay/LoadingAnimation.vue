@@ -3,5 +3,5 @@
 </template>
 
 <script>
-import "../design/LoadingAnimation.scss"
+import "../../design/flightDisplay/LoadingAnimation.scss"
 </script>

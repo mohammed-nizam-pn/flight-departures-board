@@ -1,7 +1,7 @@
 <script>
 import "./design/App.scss"
 import Header from "@/components/Header.vue"
-import FlightDetails from "@/components/FlightDetails.vue"
+import FlightDetails from "@/components/flightDisplay/FlightDetails.vue"
 
 export default {
   data: function () {

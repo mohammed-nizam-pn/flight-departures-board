@@ -9,5 +9,5 @@
 </template>
 
 <script>
-import "../design/ErrorMessage.scss"
+import "../../design/flightDisplay/ErrorMessage.scss"
 </script>

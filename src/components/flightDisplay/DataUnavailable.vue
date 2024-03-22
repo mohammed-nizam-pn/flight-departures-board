@@ -6,5 +6,5 @@
 </template>
 
 <script>
-import "../design/DataUnavailable.scss"
+import "../../design/flightDisplay/DataUnavailable.scss"
 </script>

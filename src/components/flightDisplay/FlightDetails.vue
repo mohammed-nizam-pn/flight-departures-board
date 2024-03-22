@@ -1,9 +1,9 @@
 <script>
-import axios from "axios"
-import "../design/FlightDetails.scss"
-import ErrorMessage from "@/components/ErrorMessage.vue"
-import DataUnavailable from "@/components/DataUnavailable.vue"
-import LoadingAnimation from "@/components/LoadingAnimation.vue"
+import "../../design/flightDisplay/FlightDetails.scss"
+import ErrorMessage from "@/components/flightDisplay/ErrorMessage.vue"
+import DataUnavailable from "@/components/flightDisplay/DataUnavailable.vue"
+import LoadingAnimation from "@/components/flightDisplay/LoadingAnimation.vue"
+import { fetchFlightData } from "@/services/FlightDataService"
 
 export default {
   data: function () {
@@ -19,28 +19,15 @@ export default {
     dataUnavailable: DataUnavailable,
     loadingAnimation: LoadingAnimation,
   },
-  created() {
-    axios
-      .get("https://6315ae3e5b85ba9b11e4cb85.mockapi.io/departures/Flightdata")
-      .then((response) => {
-        this.flightData =
-          response.data?.allDepartures.sort((a, b) => {
-            return (
-              new Date(a.estimatedDepartureDateTime) -
-              new Date(b.estimatedDepartureDateTime)
-            )
-          }) || []
-        if (this.flightData.length === 0) {
-          this.noData = true
-        }
-      })
-      .catch((error) => {
-        console.log(error, "Error Encountered")
-        this.errored = true
-      })
-      .finally(() => {
-        this.loading = false
-      })
+  async created() {
+    try {
+      this.flightData = await fetchFlightData()
+      this.noData = this.flightData.length === 0
+    } catch (error) {
+      this.errored = true
+    } finally {
+      this.loading = false
+    }
   },
 }
 </script>
