@@ -1,12 +1,20 @@
 .flight-list {
   color: white;
   width: 100%;
+  font-weight: 600;
   table {
     border-spacing: 0 1rem;
     width: 90%;
     margin: 1rem auto;
     thead {
-      background: linear-gradient(90deg, #ffffff, #aebcca);
+      background: linear-gradient(
+        90deg,
+        #ffffff,
+        #d9e0e6 38%,
+        #b3c0cd 56%,
+        #c0cbd5 78%,
+        #aebcca
+      );
       color: #000000;
       font-size: 0.94rem;
       text-align: left;
@@ -28,7 +36,7 @@
       text-align: left;
       tr {
         td {
-          padding: 2rem 0 2rem 4rem;
+          padding: 1rem 0 1rem 4rem;
           border: solid 1px white;
           border-style: solid none solid none;
           &:first-of-type {
@@ -40,6 +48,36 @@
             border-right-style: solid;
             border-top-right-radius: 0.6rem;
             border-bottom-right-radius: 0.6rem;
+          }
+        }
+      }
+      .time,
+      .destination-airport-code,
+      .airline {
+        color: #ffffff;
+      }
+      .destination-airport,
+      .gate {
+        color: #f5d836;
+      }
+      .status {
+        p {
+          display: inline-flex;
+          background-color: lime;
+          width: fit-content;
+          border-top-left-radius: 0.3rem;
+          border-bottom-left-radius: 0.3rem;
+          border-top-right-radius: 2rem;
+          border-bottom-right-radius: 2rem;
+          span {
+            background-color: white;
+            margin-left: 0.7rem;
+            padding: 1rem 0.8rem;
+            color: #000000;
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+            border-top-right-radius: 2rem;
+            border-bottom-right-radius: 2rem;
           }
         }
       }

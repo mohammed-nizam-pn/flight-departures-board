@@ -19,10 +19,16 @@
           <td class="destination-airport">
             {{ flight.arrivalAirport?.cityName }}
           </td>
-          <td>{{ flight.arrivalAirport?.code }}</td>
-          <td>{{ flight.airline?.name }}</td>
-          <td>{{ flight.departureGate?.number }}</td>
-          <td>{{ flight.status }}</td>
+          <td class="destination-airport-code">
+            {{ flight.arrivalAirport?.code }}
+          </td>
+          <td class="airline">{{ flight.airline?.name }}</td>
+          <td class="gate">{{ flight.departureGate?.number }}</td>
+          <td class="status">
+            <p>
+              <span>{{ flight.status }}</span>
+            </p>
+          </td>
         </tr>
       </tbody>
     </table>
