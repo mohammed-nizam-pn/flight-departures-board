@@ -23,7 +23,13 @@ export default {
     axios
       .get("https://6315ae3e5b85ba9b11e4cb85.mockapi.io/departures/Flightdata")
       .then((response) => {
-        this.flightData = response.data?.allDepartures || []
+        this.flightData =
+          response.data?.allDepartures.sort((a, b) => {
+            return (
+              new Date(a.estimatedDepartureDateTime) -
+              new Date(b.estimatedDepartureDateTime)
+            )
+          }) || []
         if (this.flightData.length === 0) {
           this.noData = true
         }
@@ -50,12 +56,13 @@ export default {
         <dataUnavailable></dataUnavailable>
       </div>
       <div v-for="flight in flightData" class="flightItem" v-if="!loading">
-        <span> {{ flight.estimatedDepartureDateTime }}</span>
-        <span> {{ flight.departureAirport?.cityName }}</span>
-        <span>{{ flight.departureAirport?.code }}</span>
-        <span>{{ flight.airline?.name }}</span>
-        <span>{{ flight.departureGate?.number }}</span>
-        <span>{{ flight.status }}</span>
+        <p>
+          {{ flight.estimatedDepartureDateTime }}<span></span>
+          {{ flight.arrivalAirport?.cityName }}
+          {{ flight.arrivalAirport?.code }}
+          {{ flight.departureGate?.number }}
+          {{ flight.status }}
+        </p>
       </div>
     </div>
   </div>
@@ -65,7 +72,7 @@ export default {
 .flightItem {
   color: white;
   span {
-    padding-right: 20px;
+    margin-right: 10px;
   }
 }
 </style>
