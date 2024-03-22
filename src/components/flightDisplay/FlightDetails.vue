@@ -4,6 +4,7 @@ import ErrorMessage from "@/components/flightDisplay/ErrorMessage.vue"
 import DataUnavailable from "@/components/flightDisplay/DataUnavailable.vue"
 import LoadingAnimation from "@/components/flightDisplay/LoadingAnimation.vue"
 import FlightList from "@/components/flightDisplay/FlightList.vue"
+import FlightUpdateForm from "@/components/updateFlight/FlightUpdateForm.vue"
 import { fetchFlightData } from "@/services/FlightDataService"
 
 export default {
@@ -13,6 +14,8 @@ export default {
       loading: true,
       errored: false,
       noData: false,
+      showForm: false,
+      selectedFlight: null,
     }
   },
   components: {
@@ -20,6 +23,7 @@ export default {
     dataUnavailable: DataUnavailable,
     loadingAnimation: LoadingAnimation,
     flightList: FlightList,
+    flightUpdateForm: FlightUpdateForm,
   },
   async created() {
     try {
@@ -30,6 +34,15 @@ export default {
     } finally {
       this.loading = false
     }
+  },
+  methods: {
+    showUpdateForm(flight) {
+      this.selectedFlight = flight
+      this.showForm = true
+    },
+    cancelUpdate() {
+      this.showForm = false
+    },
   },
 }
 </script>
@@ -47,8 +60,16 @@ export default {
       <flightList
         v-if="!loading && !errored && !noData"
         :allFlights="flightData"
+        @flight-click="showUpdateForm"
       >
       </flightList>
+      <div v-if="showForm" class="update-form">
+        <flightUpdateForm
+          :selectedFlight="selectedFlight"
+          @update-flight="updateFlight"
+          @cancel-update="cancelUpdate"
+        ></flightUpdateForm>
+      </div>
     </div>
   </div>
 </template>
