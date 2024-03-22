@@ -1,6 +1,7 @@
 <script>
-import Header from "@/components/Header.vue"
 import "./design/App.scss"
+import Header from "@/components/Header.vue"
+import FlightDetails from "@/components/FlightDetails.vue"
 
 export default {
   data: function () {
@@ -8,6 +9,7 @@ export default {
   },
   components: {
     appHeader: Header,
+    flightDetails: FlightDetails,
   },
 }
 </script>
@@ -15,6 +17,7 @@ export default {
 <template>
   <div id="main-container">
     <appHeader></appHeader>
+    <flightDetails></flightDetails>
   </div>
 </template>
 

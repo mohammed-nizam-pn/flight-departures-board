@@ -2,13 +2,17 @@ import Vue from "vue"
 import App from "./App.vue"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
-import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons"
+import {
+  faPlaneDeparture,
+  faPlaneSlash,
+  faCircleExclamation,
+} from "@fortawesome/free-solid-svg-icons"
 
 /*
  * Adding font awesone icons to the svg library and creating a component.
  * Refer https://docs.fontawesome.com/web/use-with/vue/ for more.
  */
-library.add(faPlaneDeparture)
+library.add(faPlaneDeparture, faPlaneSlash, faCircleExclamation)
 Vue.component("font-awesome-icon", FontAwesomeIcon)
 
 new Vue({
