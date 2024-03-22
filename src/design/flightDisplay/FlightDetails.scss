@@ -1,5 +1,5 @@
 .flights-container {
-  min-height: 50vh;
+  min-height: calc(100vh - 10.5rem);
   background: linear-gradient(90deg, #464646, #000000);
   margin-top: 0.5rem;
   display: flex;
