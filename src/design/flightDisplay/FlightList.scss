@@ -1,0 +1,48 @@
+.flight-list {
+  color: white;
+  width: 100%;
+  table {
+    border-spacing: 0 1rem;
+    width: 90%;
+    margin: 1rem auto;
+    thead {
+      background: linear-gradient(90deg, #ffffff, #aebcca);
+      color: #000000;
+      font-size: 0.94rem;
+      text-align: left;
+      height: 2rem;
+      tr th {
+        padding: 1rem 0 1rem 4rem;
+        &:first-of-type {
+          border-top-left-radius: 0.6rem;
+          border-bottom-left-radius: 0.6rem;
+        }
+        &:last-of-type {
+          border-top-right-radius: 0.6rem;
+          border-bottom-right-radius: 0.6rem;
+        }
+      }
+    }
+    tbody {
+      font-size: 1.257rem;
+      text-align: left;
+      tr {
+        td {
+          padding: 2rem 0 2rem 4rem;
+          border: solid 1px white;
+          border-style: solid none solid none;
+          &:first-of-type {
+            border-left-style: solid;
+            border-top-left-radius: 0.6rem;
+            border-bottom-left-radius: 0.6rem;
+          }
+          &:last-of-type {
+            border-right-style: solid;
+            border-top-right-radius: 0.6rem;
+            border-bottom-right-radius: 0.6rem;
+          }
+        }
+      }
+    }
+  }
+}

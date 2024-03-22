@@ -3,6 +3,7 @@ import "../../design/flightDisplay/FlightDetails.scss"
 import ErrorMessage from "@/components/flightDisplay/ErrorMessage.vue"
 import DataUnavailable from "@/components/flightDisplay/DataUnavailable.vue"
 import LoadingAnimation from "@/components/flightDisplay/LoadingAnimation.vue"
+import FlightList from "@/components/flightDisplay/FlightList.vue"
 import { fetchFlightData } from "@/services/FlightDataService"
 
 export default {
@@ -18,6 +19,7 @@ export default {
     errorMessage: ErrorMessage,
     dataUnavailable: DataUnavailable,
     loadingAnimation: LoadingAnimation,
+    flightList: FlightList,
   },
   async created() {
     try {
@@ -34,32 +36,21 @@ export default {
 
 <template>
   <div class="flights-container">
-    <div class="infoPanel">
-      <div class="dataLoading" v-if="loading">
+    <div class="info-panel">
+      <div v-if="loading">
         <loadingAnimation></loadingAnimation>
       </div>
-      <div class="dataError" v-if="errored"><errorMessage></errorMessage></div>
-      <div v-if="noData && !loading" class="noDataAvailable">
+      <div v-if="errored"><errorMessage></errorMessage></div>
+      <div v-if="noData && !loading && !errored">
         <dataUnavailable></dataUnavailable>
       </div>
-      <div v-for="flight in flightData" class="flightItem" v-if="!loading">
-        <p>
-          {{ flight.estimatedDepartureDateTime }}<span></span>
-          {{ flight.arrivalAirport?.cityName }}
-          {{ flight.arrivalAirport?.code }}
-          {{ flight.departureGate?.number }}
-          {{ flight.status }}
-        </p>
-      </div>
+      <flightList
+        v-if="!loading && !errored && !noData"
+        :allFlights="flightData"
+      >
+      </flightList>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-.flightItem {
-  color: white;
-  span {
-    margin-right: 10px;
-  }
-}
-</style>
+<style lang="scss"></style>
