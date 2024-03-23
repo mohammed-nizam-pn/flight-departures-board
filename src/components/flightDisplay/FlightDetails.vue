@@ -70,6 +70,8 @@ export default {
             })
           }, 700)
         }, 500)
+      } else {
+        alert("Status not changed. Please provide a new value to update.")
       }
     },
     cancelUpdate(flight) {

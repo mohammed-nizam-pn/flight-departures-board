@@ -47,13 +47,18 @@
     margin: 1rem auto;
     button {
       padding: 0.7rem 1rem;
-      margin: 0 3rem;
+      margin: 0.2rem 3rem;
       font-size: 1.257rem;
       font-weight: 600;
       color: #000000;
       background: radial-gradient(#ead550, #dfc42e);
       border-radius: 0.4rem;
       cursor: pointer;
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 5px rgba(255, 255, 255, 0.5);
+        border: 1px solid #dfc42e;
+      }
     }
   }
   .status-select-container {
