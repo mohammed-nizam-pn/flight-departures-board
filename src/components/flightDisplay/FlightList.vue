@@ -37,6 +37,7 @@ export default {
           v-for="(flight, index) in allFlights"
           :key="index"
           @click="handleFlightClick(flight, index)"
+          :class="'flight-' + index"
         >
           <td class="time">
             {{ formatTime(flight.estimatedDepartureDateTime) }}

@@ -27,7 +27,7 @@ export default {
       this.$emit("update-flight", updatedFlightData)
     },
     handleCancel() {
-      this.$emit("cancel-update")
+      this.$emit("cancel-update", { flightId: this.selectedFlight.id })
     },
     scrollToUpdateFlightStatus() {
       const updateFlightStatusElement = this.$el.querySelector(

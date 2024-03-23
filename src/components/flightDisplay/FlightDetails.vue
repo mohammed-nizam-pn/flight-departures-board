@@ -55,7 +55,13 @@ export default {
         this.showForm = false
       }
     },
-    cancelUpdate() {
+    cancelUpdate(flight) {
+      const previoulySelectedElement = this.$el.querySelector(
+        `.flight-${flight.flightId}`
+      )
+      if (previoulySelectedElement) {
+        previoulySelectedElement.scrollIntoView({ behavior: "smooth" })
+      }
       this.showForm = false
     },
   },
