@@ -16,7 +16,8 @@ export default {
       noData: false,
       showForm: false,
       selectedFlight: null,
-      showScrollButton: false,
+      showScrollButtonUp: false,
+      showScrollButtonDown: true,
     }
   },
   components: {
@@ -84,13 +85,25 @@ export default {
       this.showForm = false
     },
     handleScroll() {
-      const scrollPosition = window.scrollY || window.pageYOffset
+      const scrollPosition = window.scrollY
       const halfViewportHeight = window.innerHeight / 2
-      this.showScrollButton = scrollPosition > halfViewportHeight
+      const bottomOffset =
+        document.documentElement.scrollHeight - window.innerHeight
+      this.showScrollButtonUp = scrollPosition > halfViewportHeight
+      this.showScrollButtonDown =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight
+          ? false
+          : true
     },
     scrollToTop() {
       window.scrollTo({
         top: 0,
+        behavior: "smooth",
+      })
+    },
+    scrollToBottom() {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
         behavior: "smooth",
       })
     },
@@ -128,8 +141,22 @@ export default {
         ></flightUpdateForm>
       </div>
     </div>
-    <div v-if="showScrollButton" class="scroll-top-button" @click="scrollToTop">
+    <div
+      v-if="showScrollButtonUp"
+      class="scroll-top-button"
+      @click="scrollToTop"
+    >
       <font-awesome-icon icon="fa-solid fa-arrow-up" class="scroll-top-icon" />
+    </div>
+    <div
+      v-if="showScrollButtonDown"
+      class="scroll-down-button"
+      @click="scrollToBottom"
+    >
+      <font-awesome-icon
+        icon="fa-solid fa-arrow-down"
+        class="scroll-down-icon"
+      />
     </div>
   </div>
 </template>

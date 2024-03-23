@@ -7,6 +7,7 @@ import {
   faPlaneSlash,
   faCircleExclamation,
   faArrowUp,
+  faArrowDown,
   faPlaneCircleCheck,
   faPlaneCircleExclamation,
   faClockRotateLeft,
@@ -25,7 +26,8 @@ library.add(
   faPlaneCircleCheck,
   faPlaneCircleExclamation,
   faClockRotateLeft,
-  faPlaneCircleXmark
+  faPlaneCircleXmark,
+  faArrowDown
 )
 Vue.component("font-awesome-icon", FontAwesomeIcon)
 
