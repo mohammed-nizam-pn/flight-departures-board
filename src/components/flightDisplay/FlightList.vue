@@ -19,6 +19,33 @@ export default {
       flight.id = index
       this.$emit("flight-click", flight)
     },
+    getStatusIcon(flight) {
+      let iconClass = ""
+      let backgroundColorClass = ""
+
+      switch (flight.status) {
+        case "Departed":
+          iconClass = "fa-solid fa-plane-circle-check"
+          backgroundColorClass = "green-background"
+          break
+        case "Diverted":
+          iconClass = "fa-solid fa-plane-circle-exclamation"
+          backgroundColorClass = "yellow-background"
+          break
+        case "Delayed":
+          iconClass = "fa-solid fa-clock-rotate-left"
+          backgroundColorClass = "orange-background"
+          break
+        case "Cancelled":
+          iconClass = "fa-solid fa-plane-circle-xmark"
+          backgroundColorClass = "red-background"
+          break
+        default:
+          break
+      }
+
+      return { iconClass, backgroundColorClass }
+    },
   },
   mixins: [timeMixin],
   mounted() {
@@ -74,29 +101,14 @@ export default {
             {{ flight.departureGate?.number }}
           </td>
           <td :class="'status' + (shouldAnimateUpdate ? ' animate' : '')">
-            <p>
-              <span
-                ><font-awesome-icon
-                  icon="fa-solid fa-plane-circle-check"
-                  v-if="flight.status == 'Departed'"
-                  class="status-icon"
-                />
+            <p :class="getStatusIcon(flight).backgroundColorClass">
+              <span>
                 <font-awesome-icon
-                  icon="fa-solid fa-plane-circle-exclamation"
-                  v-if="flight.status == 'Diverted'"
+                  :icon="getStatusIcon(flight).iconClass"
+                  v-if="getStatusIcon(flight).iconClass"
                   class="status-icon"
-                />
-                <font-awesome-icon
-                  icon="fa-solid fa-clock-rotate-left"
-                  v-if="flight.status == 'Delayed'"
-                  class="status-icon"
-                />
-                <font-awesome-icon
-                  icon="fa-solid fa-plane-circle-xmark"
-                  v-if="flight.status == 'Cancelled'"
-                  class="status-icon"
-                />{{ flight.status }}</span
-              >
+                />{{ flight.status }}
+              </span>
             </p>
           </td>
         </tr>

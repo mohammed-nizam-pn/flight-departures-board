@@ -78,7 +78,7 @@
       .status {
         p {
           display: inline-flex;
-          background-color: lime;
+          background-color: grey;
           width: fit-content;
           border-top-left-radius: 0.3rem;
           border-bottom-left-radius: 0.3rem;
@@ -98,6 +98,18 @@
             border-bottom-right-radius: 2rem;
           }
         }
+      }
+      .red-background {
+        background-color: red !important;
+      }
+      .yellow-background {
+        background-color: yellow !important;
+      }
+      .green-background {
+        background-color: lime !important;
+      }
+      .orange-background {
+        background-color: orange !important;
       }
     }
   }
