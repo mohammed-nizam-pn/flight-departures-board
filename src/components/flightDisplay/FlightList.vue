@@ -75,7 +75,28 @@ export default {
           </td>
           <td :class="'status' + (shouldAnimateUpdate ? ' animate' : '')">
             <p>
-              <span>{{ flight.status }}</span>
+              <span
+                ><font-awesome-icon
+                  icon="fa-solid fa-plane-circle-check"
+                  v-if="flight.status == 'Departed'"
+                  class="status-icon"
+                />
+                <font-awesome-icon
+                  icon="fa-solid fa-plane-circle-exclamation"
+                  v-if="flight.status == 'Diverted'"
+                  class="status-icon"
+                />
+                <font-awesome-icon
+                  icon="fa-solid fa-clock-rotate-left"
+                  v-if="flight.status == 'Delayed'"
+                  class="status-icon"
+                />
+                <font-awesome-icon
+                  icon="fa-solid fa-plane-circle-xmark"
+                  v-if="flight.status == 'Cancelled'"
+                  class="status-icon"
+                />{{ flight.status }}</span
+              >
             </p>
           </td>
         </tr>

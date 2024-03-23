@@ -7,13 +7,26 @@ import {
   faPlaneSlash,
   faCircleExclamation,
   faArrowUp,
+  faPlaneCircleCheck,
+  faPlaneCircleExclamation,
+  faClockRotateLeft,
+  faPlaneCircleXmark,
 } from "@fortawesome/free-solid-svg-icons"
 
 /*
  * Adding font awesone icons to the svg library and creating a component.
  * Refer https://docs.fontawesome.com/web/use-with/vue/ for more.
  */
-library.add(faPlaneDeparture, faPlaneSlash, faCircleExclamation, faArrowUp)
+library.add(
+  faPlaneDeparture,
+  faPlaneSlash,
+  faCircleExclamation,
+  faArrowUp,
+  faPlaneCircleCheck,
+  faPlaneCircleExclamation,
+  faClockRotateLeft,
+  faPlaneCircleXmark
+)
 Vue.component("font-awesome-icon", FontAwesomeIcon)
 
 new Vue({
