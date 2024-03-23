@@ -16,6 +16,7 @@ export default {
       noData: false,
       showForm: false,
       selectedFlight: null,
+      showScrollButton: false,
     }
   },
   components: {
@@ -53,23 +54,23 @@ export default {
         }
         this.flightData.splice(index, 1, updatedFlight)
         this.showForm = false
-      }
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-      setTimeout(() => {
-        const tdElements = document.querySelectorAll(".flight-list tbody td")
-        tdElements.forEach((td) => {
-          td.classList.add("animate")
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
         })
-
         setTimeout(() => {
+          const tdElements = document.querySelectorAll(".flight-list tbody td")
           tdElements.forEach((td) => {
-            td.classList.remove("animate")
+            td.classList.add("animate")
           })
-        }, 700)
-      }, 500)
+
+          setTimeout(() => {
+            tdElements.forEach((td) => {
+              td.classList.remove("animate")
+            })
+          }, 700)
+        }, 500)
+      }
     },
     cancelUpdate(flight) {
       const previoulySelectedElement = this.$el.querySelector(
@@ -80,6 +81,23 @@ export default {
       }
       this.showForm = false
     },
+    handleScroll() {
+      const scrollPosition = window.scrollY || window.pageYOffset
+      const halfViewportHeight = window.innerHeight / 2
+      this.showScrollButton = scrollPosition > halfViewportHeight
+    },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll)
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll)
   },
 }
 </script>
@@ -107,6 +125,9 @@ export default {
           @cancel-update="cancelUpdate"
         ></flightUpdateForm>
       </div>
+    </div>
+    <div v-if="showScrollButton" class="scroll-top-button" @click="scrollToTop">
+      <font-awesome-icon icon="fa-solid fa-arrow-up" class="scroll-top-icon" />
     </div>
   </div>
 </template>

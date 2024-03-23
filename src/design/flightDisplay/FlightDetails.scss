@@ -16,4 +16,40 @@
   .update-form {
     width: 100%;
   }
+
+  .scroll-top-button {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    color: #000000;
+    background-color: #f5d836;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: breath 1s ease-in-out infinite;
+    .scroll-top-icon {
+      font-size: 1.25rem;
+    }
+    &:hover {
+      animation: none;
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes breath {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
