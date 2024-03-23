@@ -1,3 +1,7 @@
+<script>
+import "../../design/flightDisplay/ErrorMessage.scss"
+</script>
+
 <template>
   <div class="error-message">
     <font-awesome-icon icon="fa-solid fa-circle-exclamation" class="icon" />
@@ -7,7 +11,3 @@
     </p>
   </div>
 </template>
-
-<script>
-import "../../design/flightDisplay/ErrorMessage.scss"
-</script>

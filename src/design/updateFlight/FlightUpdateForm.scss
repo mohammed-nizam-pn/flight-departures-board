@@ -3,6 +3,7 @@
   font-size: 1.257rem;
   font-weight: 600;
   width: 100%;
+  cursor: default;
   h1 {
     text-align: center;
     font-size: 2rem;
@@ -20,25 +21,87 @@
   }
   form {
     border: 1px solid white;
-    padding: 2rem;
+    padding: 2rem 4rem;
     margin: 0 auto;
     width: 90%;
     border-radius: 0.6rem;
     margin-bottom: 2rem;
     .flight-data-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
   .flight-data {
     display: flex;
+    padding: 0.5rem 0;
   }
   .highlight {
     color: #dfc42e;
+    margin-left: 1rem;
   }
   .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1rem auto;
+    button {
+      padding: 0.7rem 1rem;
+      margin: 0 3rem;
+      font-size: 1.257rem;
+      font-weight: 600;
+      color: #000000;
+      background: radial-gradient(#ead550, #dfc42e);
+      border: 1px solid #dfc42e;
+      border-radius: 0.4rem;
+      cursor: pointer;
+    }
+  }
+  .status-select-container {
+    display: flex;
+    flex-direction: column;
+
+    .status-select {
+      display: flex;
+      padding: 0.5rem 0;
+      align-items: center;
+      justify-content: center;
+      select {
+        margin-left: 1rem;
+        padding: 0.4rem;
+        color: #dfc42e;
+        background: transparent;
+        border: 1px solid #dfc42e;
+        font-size: 1.25rem;
+        width: 100%;
+        border-radius: 0.4rem;
+        cursor: pointer;
+        option {
+          color: #dfc42e;
+          background-color: black;
+          &:disabled {
+            background-color: grey;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    textarea {
+      padding: 0.4rem;
+      color: #dfc42e;
+      background: transparent;
+      border: 1px solid #dfc42e;
+      font-size: 1.25rem;
+      width: 100%;
+      border-radius: 0.4rem;
+      resize: none;
+    }
+  }
+  .left-content,
+  .right-content {
+    width: 100%;
+  }
+  .right {
+    justify-content: flex-end;
   }
 }

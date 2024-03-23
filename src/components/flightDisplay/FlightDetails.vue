@@ -40,6 +40,21 @@ export default {
       this.selectedFlight = flight
       this.showForm = true
     },
+    updateFlight(updatedFlightDetails) {
+      const index = updatedFlightDetails.flightId
+      if (
+        updatedFlightDetails.status !== "" &&
+        index >= 0 &&
+        index < this.flightData.length
+      ) {
+        const updatedFlight = {
+          ...this.flightData[index],
+          status: updatedFlightDetails.status,
+        }
+        this.flightData.splice(index, 1, updatedFlight)
+        this.showForm = false
+      }
+    },
     cancelUpdate() {
       this.showForm = false
     },

@@ -1,3 +1,24 @@
+<script>
+import "../../design/flightDisplay/FlightList.scss"
+import { timeMixin } from "../../mixins/timeMixin"
+
+export default {
+  props: {
+    allFlights: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    handleFlightClick(flight, index) {
+      flight.id = index
+      this.$emit("flight-click", flight)
+    },
+  },
+  mixins: [timeMixin],
+}
+</script>
+
 <template>
   <div class="flight-list">
     <table>
@@ -38,30 +59,5 @@
     </table>
   </div>
 </template>
-
-<script>
-import "../../design/flightDisplay/FlightList.scss"
-
-export default {
-  props: {
-    allFlights: {
-      type: Array,
-      required: true,
-    },
-  },
-  methods: {
-    formatTime(dateTime) {
-      const date = new Date(dateTime)
-      const hours = ("0" + date.getHours()).slice(-2)
-      const minutes = ("0" + date.getMinutes()).slice(-2)
-      return `${hours}.${minutes}`
-    },
-    handleFlightClick(flight, index) {
-      flight.id = index
-      this.$emit("flight-click", flight)
-    },
-  },
-}
-</script>
 
 <style></style>
