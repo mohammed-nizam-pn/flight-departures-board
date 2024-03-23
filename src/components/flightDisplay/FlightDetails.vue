@@ -54,6 +54,22 @@ export default {
         this.flightData.splice(index, 1, updatedFlight)
         this.showForm = false
       }
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+      setTimeout(() => {
+        const tdElements = document.querySelectorAll(".flight-list tbody td")
+        tdElements.forEach((td) => {
+          td.classList.add("animate")
+        })
+
+        setTimeout(() => {
+          tdElements.forEach((td) => {
+            td.classList.remove("animate")
+          })
+        }, 700)
+      }, 500)
     },
     cancelUpdate(flight) {
       const previoulySelectedElement = this.$el.querySelector(

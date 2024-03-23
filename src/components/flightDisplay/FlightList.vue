@@ -9,6 +9,11 @@ export default {
       required: true,
     },
   },
+  data: function () {
+    return {
+      shouldAnimateUpdate: true,
+    }
+  },
   methods: {
     handleFlightClick(flight, index) {
       flight.id = index
@@ -16,6 +21,11 @@ export default {
     },
   },
   mixins: [timeMixin],
+  mounted() {
+    setTimeout(() => {
+      this.shouldAnimateUpdate = false
+    }, 700)
+  },
 }
 </script>
 
@@ -37,20 +47,33 @@ export default {
           v-for="(flight, index) in allFlights"
           :key="index"
           @click="handleFlightClick(flight, index)"
-          :class="'flight-' + index"
+          :class="'flight-' + index + (shouldAnimateUpdate ? ' animate' : '')"
         >
-          <td class="time">
+          <td :class="'time' + (shouldAnimateUpdate ? ' animate' : '')">
             {{ formatTime(flight.estimatedDepartureDateTime) }}
           </td>
-          <td class="destination-airport">
+          <td
+            :class="
+              'destination-airport' + (shouldAnimateUpdate ? ' animate' : '')
+            "
+          >
             {{ flight.arrivalAirport?.cityName }}
           </td>
-          <td class="destination-airport-code">
+          <td
+            :class="
+              'destination-airport-code' +
+              (shouldAnimateUpdate ? ' animate' : '')
+            "
+          >
             {{ flight.arrivalAirport?.code }}
           </td>
-          <td class="airline">{{ flight.airline?.name }}</td>
-          <td class="gate">{{ flight.departureGate?.number }}</td>
-          <td class="status">
+          <td :class="'airline' + (shouldAnimateUpdate ? ' animate' : '')">
+            {{ flight.airline?.name }}
+          </td>
+          <td :class="'gate' + (shouldAnimateUpdate ? ' animate' : '')">
+            {{ flight.departureGate?.number }}
+          </td>
+          <td :class="'status' + (shouldAnimateUpdate ? ' animate' : '')">
             <p>
               <span>{{ flight.status }}</span>
             </p>
