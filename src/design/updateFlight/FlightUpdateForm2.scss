@@ -1,4 +1,6 @@
-.flight-update-form {
+.flight-update-form2 {
+  animation: delayForm 0.8s ease-in-out;
+  animation-iteration-count: 1;
   color: white;
   font-size: 1.257rem;
   font-weight: 600;
@@ -29,7 +31,7 @@
     .flight-data-container {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
     }
   }
   .flight-data {
@@ -58,13 +60,29 @@
         box-shadow: 0 3px 5px rgba(255, 255, 255, 0.5);
         border: 1px solid #dfc42e;
       }
+      &:active {
+        transform: translateY(-2px);
+      }
     }
   }
-  .status-select-container {
-    display: flex;
-    flex-direction: column;
-
-    .status-select {
+  .left-content,
+  .right-content {
+    width: 100%;
+  }
+  .right {
+    justify-content: flex-end;
+  }
+  .status-select-container,
+  .destination-select-container,
+  .airline-select-container,
+  .time-select-container,
+  .flightNumber-select-container {
+    display: inline-block;
+    width: 100%;
+    .status-select,
+    .destination-select,
+    .airline-select,
+    .time-select {
       display: flex;
       padding: 0.5rem 0;
       align-items: center;
@@ -99,12 +117,25 @@
       border-radius: 0.4rem;
       resize: none;
     }
+    .destination-select,
+    .airline-select,
+    .time-select {
+      select {
+        width: 60%;
+      }
+    }
   }
-  .left-content,
-  .right-content {
-    width: 100%;
+}
+@keyframes delayForm {
+  0% {
+    transform: translateY(-100%) scaleY(0);
+    opacity: 0;
   }
-  .right {
-    justify-content: flex-end;
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%) scaleY(1);
+    opacity: 1;
   }
 }

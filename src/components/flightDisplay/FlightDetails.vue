@@ -5,6 +5,7 @@ import DataUnavailable from "@/components/flightDisplay/DataUnavailable.vue"
 import LoadingAnimation from "@/components/flightDisplay/LoadingAnimation.vue"
 import FlightList from "@/components/flightDisplay/FlightList.vue"
 import FlightUpdateForm from "@/components/updateFlight/FlightUpdateForm.vue"
+import FlightUpdateForm2 from "@/components/updateFlight/FlightUpdateForm2.vue"
 import { fetchFlightData } from "@/services/FlightDataService"
 
 export default {
@@ -26,6 +27,7 @@ export default {
     loadingAnimation: LoadingAnimation,
     flightList: FlightList,
     flightUpdateForm: FlightUpdateForm,
+    flightUpdateForm2: FlightUpdateForm2,
   },
   async created() {
     try {
@@ -47,7 +49,8 @@ export default {
       if (
         updatedFlightDetails.status !== "" &&
         index >= 0 &&
-        index < this.flightData.length
+        index < this.flightData.length &&
+        updatedFlightDetails.status !== this.flightData[index].status
       ) {
         const updatedFlight = {
           ...this.flightData[index],
@@ -87,8 +90,6 @@ export default {
     handleScroll() {
       const scrollPosition = window.scrollY
       const halfViewportHeight = window.innerHeight / 2
-      const bottomOffset =
-        document.documentElement.scrollHeight - window.innerHeight
       this.showScrollButtonUp = scrollPosition > halfViewportHeight
       this.showScrollButtonDown =
         window.innerHeight + window.scrollY >= document.body.offsetHeight
@@ -139,6 +140,12 @@ export default {
           @update-flight="updateFlight"
           @cancel-update="cancelUpdate"
         ></flightUpdateForm>
+      </div>
+      <div v-if="!showForm && !noData && !errored" class="update-form2">
+        <flightUpdateForm2
+          :allFlights="flightData"
+          @update-flight="updateFlight"
+        ></flightUpdateForm2>
       </div>
     </div>
     <div

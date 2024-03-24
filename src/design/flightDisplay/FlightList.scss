@@ -19,6 +19,8 @@
       font-size: 0.94rem;
       text-align: left;
       height: 2rem;
+      position: sticky;
+      top: 0;
       tr th {
         padding: 1rem 0 1rem 4rem;
         &:first-of-type {
