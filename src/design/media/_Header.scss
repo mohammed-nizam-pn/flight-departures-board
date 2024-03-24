@@ -1,0 +1,18 @@
+@media screen and (max-width: 400px) {
+  #header {
+    background: radial-gradient(#ead550, #dfc42e);
+    box-shadow: 0 3px 4px rgba($color: black, $alpha: 0.5);
+  }
+
+  .icon {
+    padding-right: 0.5rem;
+  }
+
+  h1 {
+    text-align: left;
+    font-size: 1.2rem;
+    width: 90%;
+    margin: auto;
+    line-height: 3rem;
+  }
+}

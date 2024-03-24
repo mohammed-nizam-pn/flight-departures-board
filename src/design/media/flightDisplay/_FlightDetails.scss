@@ -1,0 +1,13 @@
+@media screen and (max-width: 400px) {
+  .flights-container {
+    min-height: calc(100vh - 4.5rem);
+
+    .scroll-top-button {
+      display: none;
+    }
+
+    .scroll-down-button {
+      display: none;
+    }
+  }
+}

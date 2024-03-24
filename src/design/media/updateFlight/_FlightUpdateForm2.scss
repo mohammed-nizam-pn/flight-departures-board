@@ -1,0 +1,69 @@
+@media screen and (max-width: 400px) {
+  .flight-update-form2 {
+    font-size: 1rem;
+    font-weight: 500;
+    h1 {
+      font-size: 1rem;
+    }
+    form {
+      width: 98%;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      .flight-data-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+    .flight-data {
+      display: flex;
+      padding: 0;
+      padding-bottom: 0.2rem;
+    }
+    .highlight {
+      margin-left: 0.5rem;
+    }
+    .button-container {
+      margin: 0.5rem auto 0;
+      button {
+        padding: 0.5rem;
+        margin: 0.2rem 0.4rem;
+        font-size: 1rem;
+      }
+    }
+    .right {
+      justify-content: left;
+    }
+    .status-select-container,
+    .destination-select-container,
+    .airline-select-container,
+    .time-select-container,
+    .flightNumber-select-container {
+      .status-select,
+      .destination-select,
+      .airline-select,
+      .time-select {
+        padding: 0.2rem 0;
+        select {
+          margin-left: 0.5rem;
+          padding: 0.1rem;
+          font-size: 1rem;
+        }
+      }
+      textarea {
+        padding: 0.1rem;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+      }
+      .destination-select,
+      .airline-select,
+      .time-select {
+        select {
+          width: 60%;
+        }
+      }
+    }
+  }
+}
