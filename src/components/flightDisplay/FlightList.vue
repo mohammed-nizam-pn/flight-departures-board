@@ -61,7 +61,7 @@ export default {
     <table>
       <thead>
         <tr>
-          <th>Departure Time</th>
+          <th>Departure</th>
           <th>City Name</th>
           <th>Code</th>
           <th>Airline</th>

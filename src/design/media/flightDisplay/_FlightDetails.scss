@@ -1,6 +1,6 @@
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .flights-container {
-    min-height: calc(100vh - 4.5rem);
+    min-height: calc(100vh - 3.9rem);
 
     .scroll-top-button {
       display: none;
@@ -8,6 +8,36 @@
 
     .scroll-down-button {
       display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+  .flights-container {
+    min-height: calc(100vh - 5.3rem);
+    .scroll-top-button {
+      display: none;
+    }
+
+    .scroll-down-button {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1000px) {
+  .flights-container {
+    .scroll-top-button {
+      display: flex;
+      height: 2rem;
+      width: 2rem;
+      bottom: 8%;
+    }
+
+    .scroll-down-button {
+      display: flex;
+      height: 2rem;
+      width: 2rem;
     }
   }
 }

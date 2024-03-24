@@ -1,91 +1,106 @@
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .flight-list {
     width: 98%;
-    font-weight: 500;
+    font-weight: 600;
     table {
       border-spacing: 0 0.3rem;
-      width: 90%;
+      width: 100%;
       margin: 0.5rem auto;
       thead {
         font-size: 0.8rem;
-        height: 4rem;
+        height: 2rem;
         tr th {
-          padding: 1rem 0 1rem 4rem;
-          &:first-of-type {
-            border-top-left-radius: 0.6rem;
-            border-bottom-left-radius: 0.6rem;
+          &:first-of-type::after {
+            content: "";
           }
-          &:last-of-type {
-            border-top-right-radius: 0.6rem;
-            border-bottom-right-radius: 0.6rem;
-          }
+          padding: 0;
+          padding-left: 0.4rem;
         }
       }
       tbody {
-        font-size: 1.257rem;
-        text-align: left;
+        font-size: 0.8rem;
         tr {
-          cursor: pointer;
           td {
-            padding: 1rem 0 1rem 4rem;
-            border: solid 2px white;
+            padding: 0;
+            padding-left: 0.4rem;
+            border: solid 1px white;
             border-style: solid none solid none;
-            &:first-of-type {
-              border-left-style: solid;
-              border-top-left-radius: 0.6rem;
-              border-bottom-left-radius: 0.6rem;
-            }
             &:last-of-type {
-              border-right-style: solid;
-              border-top-right-radius: 0.6rem;
-              border-bottom-right-radius: 0.6rem;
-            }
-            &.animate {
-              animation: appear 0.7s ease-in-out infinite;
-              transition: all 0.4s ease-in-out;
-              @keyframes appear {
-                0% {
-                  transform: translateY(-100%) scaleY(0);
-                  opacity: 0;
-                }
-                100% {
-                  transform: translateY(0) scaleY(1);
-                  opacity: 1;
-                }
-              }
+              padding: 0.3rem 0.4rem 0.3rem 0;
             }
           }
         }
-        .time,
-        .destination-airport-code,
-        .airline {
-          color: #ffffff;
+        .status {
+          p {
+            .status-icon {
+              display: none;
+            }
+            span {
+              margin-left: 0.4rem;
+              padding: 0.3rem 0.3rem;
+              max-width: 9rem;
+            }
+          }
         }
-        .destination-airport,
-        .gate {
-          color: #f5d836;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 600px) {
+  .flight-list {
+    table {
+      tbody {
+        .status {
+          p {
+            .status-icon {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+  .flight-list {
+    width: 98%;
+    font-weight: 600;
+    table {
+      border-spacing: 0 0.3rem;
+      width: 100%;
+      margin: 0.5rem auto;
+      thead {
+        font-size: 0.85rem;
+        height: 2.5rem;
+        tr th {
+          &:first-of-type::after {
+            content: " Time";
+          }
+          padding: 0;
+          padding-left: 0.5rem;
+        }
+      }
+      tbody {
+        font-size: 0.9rem;
+        tr {
+          td {
+            padding: 0;
+            padding-left: 0.4rem;
+            border: solid 1px white;
+            border-style: solid none solid none;
+            &:last-of-type {
+              padding: 0.3rem 0.4rem 0.3rem 0;
+            }
+          }
         }
         .status {
           p {
-            display: inline-flex;
-            background-color: grey;
-            width: fit-content;
-            border-top-left-radius: 0.3rem;
-            border-bottom-left-radius: 0.3rem;
-            border-top-right-radius: 2rem;
-            border-bottom-right-radius: 2rem;
-            .status-icon {
-              padding-right: 0.3rem;
-            }
             span {
-              background-color: white;
-              margin-left: 0.7rem;
-              padding: 1rem 0.8rem;
-              color: #000000;
-              border-top-left-radius: 0.5rem;
-              border-bottom-left-radius: 0.5rem;
-              border-top-right-radius: 2rem;
-              border-bottom-right-radius: 2rem;
+              margin-left: 0.5rem;
+              padding: 0.4rem;
+              max-width: 20rem;
             }
           }
         }

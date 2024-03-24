@@ -24,6 +24,9 @@
       top: 0;
       tr th {
         padding: 1rem 0 1rem 4rem;
+        &:first-of-type::after {
+          content: " Time";
+        }
         &:first-of-type {
           border-top-left-radius: 0.6rem;
           border-bottom-left-radius: 0.6rem;
@@ -99,6 +102,8 @@
             border-bottom-left-radius: 0.5rem;
             border-top-right-radius: 2rem;
             border-bottom-right-radius: 2rem;
+            overflow-wrap: break-word;
+            max-width: 22rem;
           }
         }
       }
