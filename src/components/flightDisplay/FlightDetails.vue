@@ -156,7 +156,7 @@ export default {
       <font-awesome-icon icon="fa-solid fa-arrow-up" class="scroll-top-icon" />
     </div>
     <div
-      v-if="showScrollButtonDown"
+      v-if="showScrollButtonDown && flightData.length"
       class="scroll-down-button"
       @click="scrollToBottom"
     >

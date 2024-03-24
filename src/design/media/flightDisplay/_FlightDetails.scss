@@ -41,3 +41,9 @@
     }
   }
 }
+
+@media screen and (min-width: 1001px) and (max-width: 1300px) {
+  .flights-container {
+    min-height: calc(100vh - 6.5rem);
+  }
+}

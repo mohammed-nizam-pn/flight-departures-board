@@ -9,3 +9,9 @@
     margin: 0.4rem;
   }
 }
+
+@media screen and (min-width: 1001px) and (max-width: 1300px) {
+  #main-container {
+    margin: 1rem;
+  }
+}
