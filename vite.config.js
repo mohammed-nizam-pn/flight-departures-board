@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from "node:url"
 import browserslist from "browserslist"
+import autoprefixer from "autoprefixer"
 
 import { defineConfig } from "vite"
 import legacy from "@vitejs/plugin-legacy"
@@ -24,6 +25,11 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+  css: {
+    postcss: {
+      plugins: [autoprefixer()],
     },
   },
 })

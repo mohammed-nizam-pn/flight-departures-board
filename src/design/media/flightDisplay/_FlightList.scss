@@ -1,0 +1,95 @@
+@media screen and (max-width: 400px) {
+  .flight-list {
+    width: 98%;
+    font-weight: 500;
+    table {
+      border-spacing: 0 0.3rem;
+      width: 90%;
+      margin: 0.5rem auto;
+      thead {
+        font-size: 0.8rem;
+        height: 4rem;
+        tr th {
+          padding: 1rem 0 1rem 4rem;
+          &:first-of-type {
+            border-top-left-radius: 0.6rem;
+            border-bottom-left-radius: 0.6rem;
+          }
+          &:last-of-type {
+            border-top-right-radius: 0.6rem;
+            border-bottom-right-radius: 0.6rem;
+          }
+        }
+      }
+      tbody {
+        font-size: 1.257rem;
+        text-align: left;
+        tr {
+          cursor: pointer;
+          td {
+            padding: 1rem 0 1rem 4rem;
+            border: solid 2px white;
+            border-style: solid none solid none;
+            &:first-of-type {
+              border-left-style: solid;
+              border-top-left-radius: 0.6rem;
+              border-bottom-left-radius: 0.6rem;
+            }
+            &:last-of-type {
+              border-right-style: solid;
+              border-top-right-radius: 0.6rem;
+              border-bottom-right-radius: 0.6rem;
+            }
+            &.animate {
+              animation: appear 0.7s ease-in-out infinite;
+              transition: all 0.4s ease-in-out;
+              @keyframes appear {
+                0% {
+                  transform: translateY(-100%) scaleY(0);
+                  opacity: 0;
+                }
+                100% {
+                  transform: translateY(0) scaleY(1);
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+        .time,
+        .destination-airport-code,
+        .airline {
+          color: #ffffff;
+        }
+        .destination-airport,
+        .gate {
+          color: #f5d836;
+        }
+        .status {
+          p {
+            display: inline-flex;
+            background-color: grey;
+            width: fit-content;
+            border-top-left-radius: 0.3rem;
+            border-bottom-left-radius: 0.3rem;
+            border-top-right-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            .status-icon {
+              padding-right: 0.3rem;
+            }
+            span {
+              background-color: white;
+              margin-left: 0.7rem;
+              padding: 1rem 0.8rem;
+              color: #000000;
+              border-top-left-radius: 0.5rem;
+              border-bottom-left-radius: 0.5rem;
+              border-top-right-radius: 2rem;
+              border-bottom-right-radius: 2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
