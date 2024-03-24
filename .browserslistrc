@@ -1,4 +1,4 @@
-firefox >= 74
-chrome >= 80
+firefox >= 1
+chrome >= 1
 edge <= 115
 safari <= 16

@@ -108,3 +108,46 @@
     }
   }
 }
+
+@media screen and (min-width: 1001px) and (max-width: 1300px) {
+  .flight-list {
+    width: 100%;
+    font-weight: 600;
+    table {
+      border-spacing: 0 0.5rem;
+      margin: 0.5rem auto;
+      thead {
+        font-size: 0.8rem;
+        height: 2.5rem;
+        tr th {
+          &:first-of-type::after {
+            content: " Time";
+          }
+          padding: 0;
+          padding-left: 3rem;
+        }
+      }
+      tbody {
+        font-size: 1rem;
+        tr {
+          td {
+            padding: 0;
+            padding-left: 3rem;
+            &:last-of-type {
+              padding: 0.7rem 0.5rem 0.7rem 0;
+            }
+          }
+        }
+        .status {
+          p {
+            span {
+              margin-left: 0.4rem;
+              padding: 0.3rem 0.3rem;
+              max-width: 9rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
