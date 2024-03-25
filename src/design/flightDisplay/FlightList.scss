@@ -2,7 +2,7 @@
   color: white;
   width: 100%;
   font-weight: 600;
-  overflow-x: auto;
+  overflow: auto;
   table {
     border-spacing: 0 1rem;
     width: 90%;
@@ -20,8 +20,6 @@
       font-size: 0.94rem;
       text-align: left;
       height: 2rem;
-      position: sticky;
-      top: 0;
       tr th {
         padding: 1rem 0 1rem 4rem;
         &:first-of-type::after {

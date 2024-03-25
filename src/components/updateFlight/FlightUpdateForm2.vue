@@ -31,7 +31,10 @@ export default {
               ? this.customStatus
               : this.selectedStatus,
         }
-        if (updatedFlightData.status) {
+        if (
+          updatedFlightData.status &&
+          updatedFlightData.status !== this.selectedFlight?.status
+        ) {
           this.selectedFlight = {}
           this.selectedDestination = ""
           this.selectedAirline = ""

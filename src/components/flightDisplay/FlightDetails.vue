@@ -58,12 +58,16 @@ export default {
         }
         this.flightData.splice(index, 1, updatedFlight)
         this.showForm = false
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        })
+        const selectedFlightElement = this.$el.querySelector(
+          `.flight-${index > 0 ? index - 1 : index}`
+        )
+        if (selectedFlightElement) {
+          selectedFlightElement.scrollIntoView({ behavior: "smooth" })
+        }
         setTimeout(() => {
-          const tdElements = document.querySelectorAll(".flight-list tbody td")
+          const tdElements = document.querySelectorAll(
+            ".flight-list table tbody tr.flight-" + index + " td"
+          )
           tdElements.forEach((td) => {
             td.classList.add("animate")
           })
