@@ -4,6 +4,7 @@ import Header from "@/components/Header.vue"
 import FlightDetails from "@/components/flightDisplay/FlightDetails.vue"
 
 export default {
+  name: App,
   data: function () {
     return {}
   },

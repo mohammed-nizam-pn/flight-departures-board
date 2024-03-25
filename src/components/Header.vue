@@ -1,5 +1,13 @@
 <script>
 import "../design/Header.scss"
+
+export default {
+  data: function () {
+    return {
+      name: "Header",
+    }
+  },
+}
 </script>
 
 <template>
