@@ -56,22 +56,22 @@ export default {
           ...this.flightData[index],
           status: updatedFlightDetails.status,
         }
-        this.flightData.splice(index, 1, updatedFlight)
         this.showForm = false
-        const selectedFlightElement = this.$el.querySelector(
-          `.flight-${index > 0 ? index - 1 : index}`
-        )
+        const selectedFlightElement =
+          index === 0
+            ? this.$el.querySelector("table > thead")
+            : this.$el.querySelector(`.flight-${index > 0 ? index - 1 : index}`)
         if (selectedFlightElement) {
           selectedFlightElement.scrollIntoView({ behavior: "smooth" })
         }
         setTimeout(() => {
+          this.flightData.splice(index, 1, updatedFlight)
           const tdElements = document.querySelectorAll(
             ".flight-list table tbody tr.flight-" + index + " td"
           )
           tdElements.forEach((td) => {
             td.classList.add("animate")
           })
-
           setTimeout(() => {
             tdElements.forEach((td) => {
               td.classList.remove("animate")
