@@ -13,7 +13,7 @@ export async function fetchFlightData() {
       ) || []
     )
   } catch (error) {
-    console.error("Error fetching flight data:", error)
+    console.error("Error fetching flight data: ", error)
     throw error
   }
 }
