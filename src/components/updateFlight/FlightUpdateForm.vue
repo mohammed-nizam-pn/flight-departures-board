@@ -9,12 +9,14 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
       selectedStatus: "",
       customStatus: "",
     }
   },
+
   methods: {
     handleSubmit() {
       const updatedFlightData = {
@@ -26,22 +28,27 @@ export default {
       }
       this.$emit("update-flight", updatedFlightData)
     },
+
     handleCancel() {
       this.$emit("cancel-update", { flightId: this.selectedFlight.id })
     },
+
     scrollToUpdateFlightStatus() {
       const updateFlightStatusElement = this.$el.querySelector(
         ".flight-update-form h1"
       )
+
       if (updateFlightStatusElement) {
         updateFlightStatusElement.scrollIntoView({ behavior: "smooth" })
       }
     },
   },
   mixins: [timeMixin],
+
   mounted() {
     this.scrollToUpdateFlightStatus()
   },
+
   watch: {
     selectedFlight: {
       handler() {

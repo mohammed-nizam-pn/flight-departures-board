@@ -9,16 +9,19 @@ export default {
       required: true,
     },
   },
+
   data: function () {
     return {
       shouldAnimateUpdate: true,
     }
   },
+
   methods: {
     handleFlightClick(flight, index) {
       flight.id = index
       this.$emit("flight-click", flight)
     },
+
     getStatusIcon(flight) {
       let iconClass = ""
       let backgroundColorClass = ""
@@ -41,6 +44,7 @@ export default {
     },
   },
   mixins: [timeMixin],
+
   mounted() {
     setTimeout(() => {
       this.shouldAnimateUpdate = false

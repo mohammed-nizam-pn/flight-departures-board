@@ -9,6 +9,7 @@ export default {
       required: true,
     },
   },
+
   data() {
     return {
       selectedFlight: {},
@@ -21,6 +22,7 @@ export default {
       filteredFlights: [],
     }
   },
+
   methods: {
     handleSubmit() {
       if (this.selectedFlight?.status) {
@@ -31,6 +33,7 @@ export default {
               ? this.customStatus
               : this.selectedStatus,
         }
+
         if (
           updatedFlightData.status &&
           updatedFlightData.status !== this.selectedFlight?.status
@@ -44,9 +47,11 @@ export default {
         alert("Please select a Flight.")
       }
     },
+
     handleReset() {
       this.resetFormFields()
     },
+
     resetFormFields() {
       this.selectedFlight = {}
       this.selectedDestination = ""
@@ -57,6 +62,7 @@ export default {
       this.customStatus = ""
       this.filteredFlights = [...this.allFlights]
     },
+
     getDepartureTime(flight) {
       if (flight.actualDepartureDateTime) {
         return flight.actualDepartureDateTime
@@ -67,18 +73,24 @@ export default {
       }
     },
   },
+
   mixins: [timeMixin],
+
   computed: {
     sortedUniqueCityNames() {
       const uniqueCityNames = new Set()
+
       this.filteredFlights.forEach((flight) => {
         uniqueCityNames.add(flight.arrivalAirport.cityName)
       })
+
       return Array.from(uniqueCityNames).sort()
     },
+
     sortedUniqueAirlineNames() {
       const uniqueAirlineNames = new Set()
       const airlines = []
+
       this.filteredFlights.forEach((flight) => {
         const lowercaseName = flight.airline.name.toLowerCase()
         if (!uniqueAirlineNames.has(lowercaseName)) {
@@ -95,6 +107,7 @@ export default {
         .map((airline) => airline.original)
     },
   },
+
   watch: {
     allFlights: {
       immediate: true,
@@ -105,6 +118,7 @@ export default {
         this.filteredFlights = [...newFlights]
       },
     },
+
     selectedDestination: {
       immediate: true,
       handler(newDestination) {
@@ -115,6 +129,7 @@ export default {
         }
       },
     },
+
     selectedAirline: {
       immediate: true,
       handler(newAirline) {
@@ -125,17 +140,20 @@ export default {
         }
       },
     },
+
     selectedTime: {
       immediate: true,
       handler(newTime) {
         if (newTime) {
           this.filteredFlights = this.filteredFlights.filter((flight) => {
             const departureTime = this.getDepartureTime(flight)
+
             return departureTime === newTime
           })
         }
       },
     },
+
     filteredFlights: {
       immediate: true,
       handler(newFilteredFlights) {

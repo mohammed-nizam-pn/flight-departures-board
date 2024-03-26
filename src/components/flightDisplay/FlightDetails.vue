@@ -21,6 +21,7 @@ export default {
       showScrollButtonDown: true,
     }
   },
+
   components: {
     errorMessage: ErrorMessage,
     dataUnavailable: DataUnavailable,
@@ -29,6 +30,7 @@ export default {
     flightUpdateForm: FlightUpdateForm,
     flightUpdateForm2: FlightUpdateForm2,
   },
+
   async created() {
     try {
       this.flightData = await fetchFlightData()
@@ -39,13 +41,16 @@ export default {
       this.loading = false
     }
   },
+
   methods: {
     showUpdateForm(flight) {
       this.selectedFlight = flight
       this.showForm = true
     },
+
     updateFlight(updatedFlightDetails) {
       const index = updatedFlightDetails.flightId
+
       if (
         updatedFlightDetails.status !== "" &&
         index >= 0 &&
@@ -56,14 +61,15 @@ export default {
           ...this.flightData[index],
           status: updatedFlightDetails.status,
         }
-        this.showForm = false
         const selectedFlightElement =
           index === 0
             ? this.$el.querySelector("table > thead")
             : this.$el.querySelector(`.flight-${index > 0 ? index - 1 : index}`)
+
         if (selectedFlightElement) {
           selectedFlightElement.scrollIntoView({ behavior: "smooth" })
         }
+        this.showForm = false
         setTimeout(() => {
           this.flightData.splice(index, 1, updatedFlight)
           const tdElements = document.querySelectorAll(
@@ -82,30 +88,36 @@ export default {
         alert("Status not changed. Please provide a new value to update.")
       }
     },
+
     cancelUpdate(flight) {
       const previoulySelectedElement = this.$el.querySelector(
         `.flight-${flight.flightId}`
       )
+
       if (previoulySelectedElement) {
         previoulySelectedElement.scrollIntoView({ behavior: "smooth" })
       }
       this.showForm = false
     },
+
     handleScroll() {
       const scrollPosition = window.scrollY
       const halfViewportHeight = window.innerHeight / 2
+
       this.showScrollButtonUp = scrollPosition > halfViewportHeight
       this.showScrollButtonDown =
         window.innerHeight + window.scrollY >= document.body.offsetHeight
           ? false
           : true
     },
+
     scrollToTop() {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       })
     },
+
     scrollToBottom() {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
@@ -113,9 +125,11 @@ export default {
       })
     },
   },
+
   mounted() {
     window.addEventListener("scroll", this.handleScroll)
   },
+
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll)
   },
