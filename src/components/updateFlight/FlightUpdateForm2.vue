@@ -63,6 +63,15 @@ export default {
       this.customStatus = ""
       this.filteredFlights = [...this.allFlights]
     },
+    getDepartureTime(flight) {
+      if (flight.actualDepartureDateTime) {
+        return flight.actualDepartureDateTime
+      } else if (flight.estimatedDepartureDateTime) {
+        return flight.estimatedDepartureDateTime
+      } else {
+        return flight.scheduledDepartureDateTime
+      }
+    },
   },
   mixins: [timeMixin],
   computed: {
@@ -126,9 +135,10 @@ export default {
       immediate: true,
       handler(newTime) {
         if (newTime) {
-          this.filteredFlights = this.filteredFlights.filter(
-            (flight) => flight.estimatedDepartureDateTime === newTime
-          )
+          this.filteredFlights = this.filteredFlights.filter((flight) => {
+            const departureTime = this.getDepartureTime(flight)
+            return departureTime === newTime
+          })
         }
       },
     },
@@ -165,18 +175,35 @@ export default {
           </div>
           <div
             class="time flight-data"
-            v-if="selectedTime && !selectedFlight?.estimatedDepartureDateTime"
+            v-if="
+              selectedTime &&
+              !(
+                selectedFlight?.actualDepartureDateTime ||
+                selectedFlight?.estimatedDepartureDateTime ||
+                selectedFlight?.scheduledDepartureDateTime
+              )
+            "
           >
             <p>Estimated Departure Time:</p>
-            <p class="highlight">{{ formatTime(selectedTime) }}</p>
+            <p class="highlight">{{ formatTime([selectedTime]) }}</p>
           </div>
           <div
             class="time flight-data"
-            v-if="selectedFlight?.estimatedDepartureDateTime"
+            v-if="
+              selectedFlight?.actualDepartureDateTime ||
+              selectedFlight?.estimatedDepartureDateTime ||
+              selectedFlight?.scheduledDepartureDateTime
+            "
           >
             <p>Estimated Departure Time:</p>
             <p class="highlight">
-              {{ formatTime(selectedFlight?.estimatedDepartureDateTime) }}
+              {{
+                formatTime([
+                  selectedFlight.actualDepartureDateTime,
+                  selectedFlight.estimatedDepartureDateTime,
+                  selectedFlight.scheduledDepartureDateTime,
+                ])
+              }}
             </p>
           </div>
         </div>
@@ -259,7 +286,11 @@ export default {
           selectedDestination &&
           selectedAirline &&
           !selectedTime &&
-          !selectedFlight?.estimatedDepartureDateTime
+          !(
+            selectedFlight?.actualDepartureDateTime ||
+            selectedFlight?.estimatedDepartureDateTime ||
+            selectedFlight?.scheduledDepartureDateTime
+          )
         "
       >
         <div class="time-select">
@@ -267,10 +298,16 @@ export default {
           <select v-model="selectedTime">
             <option
               v-for="flight in filteredFlights"
-              :value="flight.estimatedDepartureDateTime"
+              :value="getDepartureTime(flight)"
               :key="flight.flightNumber"
             >
-              {{ formatTime(flight?.estimatedDepartureDateTime) }}
+              {{
+                formatTime([
+                  flight.actualDepartureDateTime,
+                  flight.estimatedDepartureDateTime,
+                  flight.scheduledDepartureDateTime,
+                ])
+              }}
             </option>
           </select>
         </div>

@@ -61,7 +61,13 @@ export default {
           <div class="time flight-data">
             <p>Departure Time:</p>
             <p class="highlight">
-              {{ formatTime(selectedFlight.estimatedDepartureDateTime) }}
+              {{
+                formatTime([
+                  selectedFlight.actualDepartureDateTime,
+                  selectedFlight.estimatedDepartureDateTime,
+                  selectedFlight.scheduledDepartureDateTime,
+                ])
+              }}
             </p>
           </div>
           <div class="destination flight-data">
