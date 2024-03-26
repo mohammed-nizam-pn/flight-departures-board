@@ -20,7 +20,7 @@ export default {
       selectedFlight: null,
       showScrollButtonUp: false,
       showScrollButtonDown: true,
-      showFilter: false,
+      showOptions: false,
       selectedCountries: [],
       filterApplied: false,
       flightsBeforeFilter: [],
@@ -155,7 +155,8 @@ export default {
       })
     },
     toggleFilter() {
-      this.showFilter = !this.showFilter
+      this.showOptions = !this.showOptions
+      this.selectedCountries = []
     },
     applyFilter() {
       if (this.selectedCountries.length > 0) {
@@ -165,10 +166,9 @@ export default {
         )
         this.filterApplied = true
       }
-      this.showFilter = false // Hide filter options after applying filter
+      this.showOptions = false
     },
     removeFilter() {
-      // Reset flightData to original data
       this.flightData = this.flightsBeforeFilter
       this.selectedCountries = []
       this.flightsBeforeFilter = []
@@ -179,7 +179,9 @@ export default {
     uniqueCountries() {
       return [
         ...new Set(
-          this.flightData.map((flight) => flight.arrivalAirport.countryName)
+          this.flightData
+            .map((flight) => flight.arrivalAirport.countryName)
+            .sort((a, b) => a.localeCompare(b))
         ),
       ]
     },
@@ -203,21 +205,77 @@ export default {
       <div v-if="noData && !loading && !errored">
         <dataUnavailable></dataUnavailable>
       </div>
-      <div class="filter-container">
-        <button @click="toggleFilter">Filter By Country</button>
-        <div v-if="showFilter" class="filter-options">
-          <div v-for="country in uniqueCountries" :key="country">
-            <input
-              type="checkbox"
-              :value="country"
-              v-model="selectedCountries"
-            />
-            <label>{{ country }}</label>
+      <div class="filter-container" v-if="!loading && !errored && !noData">
+        <div class="filter-button-container">
+          <div
+            class="selected-countries-container"
+            v-if="selectedCountries.length && filterApplied"
+          >
+            <span
+              class="selected-country"
+              v-for="country in selectedCountries"
+              :key="country"
+              >{{ country }}</span
+            >
           </div>
-          <button @click="applyFilter">Apply Filter</button>
+          <div class="buttons">
+            <button
+              @click="toggleFilter"
+              type="button"
+              class="filter-button"
+              v-if="!showOptions && !filterApplied"
+            >
+              <span class="filter-open"
+                ><font-awesome-icon icon="fa-solid fa-filter" /> Filter By
+                Country
+              </span>
+            </button>
+            <button
+              @click="toggleFilter"
+              type="button"
+              class="close-button"
+              v-if="showOptions"
+            >
+              <span class="filter-close"
+                >Close <font-awesome-icon icon="fa-solid fa-x"
+              /></span>
+            </button>
+            <button
+              @click="removeFilter"
+              type="button"
+              v-if="filterApplied"
+              class="filter-reset"
+            >
+              <span class="filter-reset-text"
+                >Clear Filter
+                <font-awesome-icon icon="fa-solid fa-filter-circle-xmark"
+              /></span>
+            </button>
+          </div>
         </div>
-        <div v-if="filterApplied">
-          <button @click="removeFilter">Remove Filter</button>
+        <div class="filter-options-container" v-if="showOptions">
+          <div v-if="showOptions" class="filter-options">
+            <div v-for="country in uniqueCountries" :key="country">
+              <input
+                type="checkbox"
+                class="custom-checkbox"
+                :id="'countryCheckbox_' + country"
+                :value="country"
+                v-model="selectedCountries"
+              />
+              <label :for="'countryCheckbox_' + country">{{ country }}</label>
+            </div>
+          </div>
+          <div class="apply-button-container">
+            <button
+              @click="applyFilter"
+              v-if="selectedCountries.length"
+              type="button"
+              class="apply-button"
+            >
+              Apply Filter
+            </button>
+          </div>
         </div>
       </div>
       <flightList

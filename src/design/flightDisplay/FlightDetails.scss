@@ -13,6 +13,105 @@
     justify-content: center;
   }
 
+  .filter-container {
+    color: white;
+    width: 100%;
+    .filter-button-container {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      transition: none;
+      .filter-button,
+      .filter-reset,
+      .close-button {
+        cursor: pointer;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        border-radius: 0.5rem;
+      }
+      .filter-button {
+        color: black;
+        background: #f5d836;
+        transition: none;
+        span {
+          transition: none;
+        }
+      }
+      .filter-reset,
+      .close-button {
+        color: #f5d836;
+        background: transparent;
+        border: 2px solid #f5d836;
+      }
+      .selected-countries-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+        padding-right: 1rem;
+        .selected-country {
+          background: transparent;
+          border: 1px solid #f5d836;
+          padding: 0.3rem;
+          font-size: 0.9rem;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+    .filter-options-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .filter-options {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        font-size: 1rem;
+        gap: 1rem;
+        padding: 1rem;
+        padding-bottom: 0;
+        text-align: center;
+        input[type="checkbox"] {
+          margin-right: 0.1rem;
+        }
+      }
+      .apply-button-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .apply-button {
+          color: black;
+          background: #f5d836;
+          cursor: pointer;
+          padding: 0.5rem;
+          font-size: 0.9rem;
+          border-radius: 0.5rem;
+          margin-top: 1rem;
+        }
+        &::after {
+          content: "";
+          display: block;
+          height: 2px;
+          width: 50%;
+          background-color: white;
+          margin: 0 auto;
+          margin-top: 1.5rem;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
   .update-form,
   .update-form2 {
     width: 100%;

@@ -14,6 +14,9 @@ import {
   faPlaneCircleXmark,
   faCaretUp,
   faCaretDown,
+  faFilter,
+  faFilterCircleXmark,
+  faX,
 } from "@fortawesome/free-solid-svg-icons"
 
 /*
@@ -31,7 +34,10 @@ library.add(
   faPlaneCircleXmark,
   faArrowDown,
   faCaretUp,
-  faCaretDown
+  faCaretDown,
+  faFilter,
+  faFilterCircleXmark,
+  faX
 )
 Vue.component("font-awesome-icon", FontAwesomeIcon)
 
