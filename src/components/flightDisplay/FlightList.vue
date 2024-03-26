@@ -125,7 +125,13 @@ export default {
           :class="'flight-' + index + (shouldAnimateUpdate ? ' animate' : '')"
         >
           <td :class="'time' + (shouldAnimateUpdate ? ' animate' : '')">
-            {{ formatTime(flight.estimatedDepartureDateTime) }}
+            {{
+              formatTime([
+                flight.actualDepartureDateTime,
+                flight.estimatedDepartureDateTime,
+                flight.scheduledDepartureDateTime,
+              ])
+            }}
           </td>
           <td
             :class="
