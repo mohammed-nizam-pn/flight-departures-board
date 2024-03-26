@@ -12,6 +12,8 @@ import {
   faPlaneCircleExclamation,
   faClockRotateLeft,
   faPlaneCircleXmark,
+  faCaretUp,
+  faCaretDown,
 } from "@fortawesome/free-solid-svg-icons"
 
 /*
@@ -27,7 +29,9 @@ library.add(
   faPlaneCircleExclamation,
   faClockRotateLeft,
   faPlaneCircleXmark,
-  faArrowDown
+  faArrowDown,
+  faCaretUp,
+  faCaretDown
 )
 Vue.component("font-awesome-icon", FontAwesomeIcon)
 

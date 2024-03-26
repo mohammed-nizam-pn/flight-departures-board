@@ -22,9 +22,7 @@
       height: 2rem;
       tr th {
         padding: 1rem 0 1rem 4rem;
-        &:first-of-type::after {
-          content: " Time";
-        }
+        cursor: pointer;
         &:first-of-type {
           border-top-left-radius: 0.6rem;
           border-bottom-left-radius: 0.6rem;

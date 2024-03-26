@@ -12,6 +12,8 @@ export default {
   data: function () {
     return {
       shouldAnimateUpdate: true,
+      sortedAccordingTo: "time",
+      sortedAscending: true,
     }
   },
   methods: {
@@ -39,6 +41,9 @@ export default {
 
       return { iconClass, backgroundColorClass }
     },
+    handleSort(sortBy) {
+      console.log(sortBy)
+    },
   },
   mixins: [timeMixin],
   mounted() {
@@ -54,12 +59,62 @@ export default {
     <table>
       <thead>
         <tr>
-          <th>Departure</th>
-          <th>City Name</th>
+          <th @click="handleSort('time')">
+            Departure Time<span v-if="sortedAccordingTo === 'time'">
+              <font-awesome-icon
+                :icon="
+                  sortedAscending
+                    ? 'fa-solid fa-caret-up'
+                    : 'fa-solid fa-caret-down'
+                "
+              />
+            </span>
+          </th>
+          <th @click="handleSort('cityName')">
+            City Name<span v-if="sortedAccordingTo === 'cityName'">
+              <font-awesome-icon
+                :icon="
+                  sortedAscending
+                    ? 'fa-solid fa-caret-up'
+                    : 'fa-solid fa-caret-down'
+                "
+              />
+            </span>
+          </th>
           <th>Code</th>
-          <th>Airline</th>
-          <th>Gate</th>
-          <th>Status</th>
+          <th @click="handleSort('airline')">
+            Airline<span v-if="sortedAccordingTo === 'airline'">
+              <font-awesome-icon
+                :icon="
+                  sortedAscending
+                    ? 'fa-solid fa-caret-up'
+                    : 'fa-solid fa-caret-down'
+                "
+              />
+            </span>
+          </th>
+          <th @click="handleSort('gate')">
+            Gate<span v-if="sortedAccordingTo === 'gate'">
+              <font-awesome-icon
+                :icon="
+                  sortedAscending
+                    ? 'fa-solid fa-caret-up'
+                    : 'fa-solid fa-caret-down'
+                "
+              />
+            </span>
+          </th>
+          <th @click="handleSort('status')">
+            Status<span v-if="sortedAccordingTo === 'status'">
+              <font-awesome-icon
+                :icon="
+                  sortedAscending
+                    ? 'fa-solid fa-caret-up'
+                    : 'fa-solid fa-caret-down'
+                "
+              />
+            </span>
+          </th>
         </tr>
       </thead>
       <tbody>
