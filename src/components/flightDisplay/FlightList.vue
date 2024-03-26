@@ -26,16 +26,16 @@ export default {
       let iconClass = ""
       let backgroundColorClass = ""
 
-      if (flight.status.includes("Departed")) {
+      if (flight?.status?.includes("Departed")) {
         iconClass = "fa-solid fa-plane-circle-check"
         backgroundColorClass = "green-background"
-      } else if (flight.status.includes("Diverted")) {
+      } else if (flight?.status?.includes("Diverted")) {
         iconClass = "fa-solid fa-plane-circle-exclamation"
         backgroundColorClass = "yellow-background"
-      } else if (flight.status.includes("Delayed")) {
+      } else if (flight?.status?.includes("Delayed")) {
         iconClass = "fa-solid fa-clock-rotate-left"
         backgroundColorClass = "orange-background"
-      } else if (flight.status.includes("Cancelled")) {
+      } else if (flight?.status?.includes("Cancelled")) {
         iconClass = "fa-solid fa-plane-circle-xmark"
         backgroundColorClass = "red-background"
       }
@@ -104,7 +104,10 @@ export default {
             {{ flight.departureGate?.number }}
           </td>
           <td :class="'status' + (shouldAnimateUpdate ? ' animate' : '')">
-            <p :class="getStatusIcon(flight).backgroundColorClass">
+            <p
+              :class="getStatusIcon(flight).backgroundColorClass"
+              v-if="flight.status"
+            >
               <span>
                 <font-awesome-icon
                   :icon="getStatusIcon(flight).iconClass"
