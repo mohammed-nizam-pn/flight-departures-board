@@ -5,7 +5,7 @@ export async function fetchFlightData() {
     const response = await axios.get(
       "https://6315ae3e5b85ba9b11e4cb85.mockapi.io/departures/Flightdata"
     )
-    const sortedDepartures = (response?.allDepartures || [])
+    const sortedDepartures = (response.data?.allDepartures || [])
       .filter(
         (departure) =>
           departure.arrivalAirport.name &&
