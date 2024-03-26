@@ -42,6 +42,13 @@ export default {
   mounted() {
     this.scrollToUpdateFlightStatus()
   },
+  watch: {
+    selectedFlight: {
+      handler() {
+        this.selectedStatus = ""
+      },
+    },
+  },
 }
 </script>
 
