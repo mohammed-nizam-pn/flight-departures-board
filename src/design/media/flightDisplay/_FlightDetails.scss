@@ -53,6 +53,11 @@
     .scroll-top-button {
       bottom: 10%;
     }
+    .scroll-top-button,
+    .scroll-down-button {
+      height: 2rem;
+      width: 2rem;
+    }
   }
 }
 
@@ -61,6 +66,11 @@
     .scroll-top-button {
       bottom: 12%;
     }
+    .scroll-top-button,
+    .scroll-down-button {
+      height: 2rem;
+      width: 2rem;
+    }
   }
 }
 
@@ -68,6 +78,11 @@
   .flights-container {
     .scroll-top-button {
       bottom: 14%;
+    }
+    .scroll-top-button,
+    .scroll-down-button {
+      height: 2rem;
+      width: 2rem;
     }
   }
 }
