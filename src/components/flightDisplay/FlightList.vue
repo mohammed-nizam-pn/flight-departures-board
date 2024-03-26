@@ -112,64 +112,73 @@ export default {
       <thead>
         <tr>
           <th @click="handleSort('time')" class="clickable">
-            Departure Time<span v-if="sortedAccordingTo === 'time'">
-              <font-awesome-icon
-                :icon="
-                  sortedAscending
-                    ? 'fa-solid fa-caret-up'
-                    : 'fa-solid fa-caret-down'
-                "
-                class="sort-icon"
-              />
-            </span>
+            <span class="header-text-container">
+              Departure Time<span v-if="sortedAccordingTo === 'time'">
+                <font-awesome-icon
+                  :icon="
+                    sortedAscending
+                      ? 'fa-solid fa-caret-up'
+                      : 'fa-solid fa-caret-down'
+                  "
+                  class="sort-icon"
+                /> </span
+            ></span>
           </th>
           <th @click="handleSort('cityName')" class="clickable">
-            City Name<span v-if="sortedAccordingTo === 'cityName'">
-              <font-awesome-icon
-                :icon="
-                  sortedAscending
-                    ? 'fa-solid fa-caret-up'
-                    : 'fa-solid fa-caret-down'
-                "
-                class="sort-icon"
-              />
+            <span class="header-text-container">
+              City Name<span v-if="sortedAccordingTo === 'cityName'">
+                <font-awesome-icon
+                  :icon="
+                    sortedAscending
+                      ? 'fa-solid fa-caret-up'
+                      : 'fa-solid fa-caret-down'
+                  "
+                  class="sort-icon"
+                />
+              </span>
             </span>
           </th>
           <th>Code</th>
           <th @click="handleSort('airline')" class="clickable">
-            Airline<span v-if="sortedAccordingTo === 'airline'">
-              <font-awesome-icon
-                :icon="
-                  sortedAscending
-                    ? 'fa-solid fa-caret-up'
-                    : 'fa-solid fa-caret-down'
-                "
-                class="sort-icon"
-              />
+            <span class="header-text-container">
+              Airline<span v-if="sortedAccordingTo === 'airline'">
+                <font-awesome-icon
+                  :icon="
+                    sortedAscending
+                      ? 'fa-solid fa-caret-up'
+                      : 'fa-solid fa-caret-down'
+                  "
+                  class="sort-icon"
+                />
+              </span>
             </span>
           </th>
           <th @click="handleSort('gate')" class="clickable">
-            Gate<span v-if="sortedAccordingTo === 'gate'">
-              <font-awesome-icon
-                :icon="
-                  sortedAscending
-                    ? 'fa-solid fa-caret-up'
-                    : 'fa-solid fa-caret-down'
-                "
-                class="sort-icon"
-              />
+            <span class="header-text-container">
+              Gate<span v-if="sortedAccordingTo === 'gate'">
+                <font-awesome-icon
+                  :icon="
+                    sortedAscending
+                      ? 'fa-solid fa-caret-up'
+                      : 'fa-solid fa-caret-down'
+                  "
+                  class="sort-icon"
+                />
+              </span>
             </span>
           </th>
           <th @click="handleSort('status')" class="clickable">
-            Status<span v-if="sortedAccordingTo === 'status'">
-              <font-awesome-icon
-                :icon="
-                  sortedAscending
-                    ? 'fa-solid fa-caret-up'
-                    : 'fa-solid fa-caret-down'
-                "
-                class="sort-icon"
-              />
+            <span class="header-text-container">
+              Status<span v-if="sortedAccordingTo === 'status'">
+                <font-awesome-icon
+                  :icon="
+                    sortedAscending
+                      ? 'fa-solid fa-caret-up'
+                      : 'fa-solid fa-caret-down'
+                  "
+                  class="sort-icon"
+                />
+              </span>
             </span>
           </th>
         </tr>
