@@ -42,13 +42,20 @@ export default {
       return { iconClass, backgroundColorClass }
     },
     getDepartureTime(flight) {
-      if (flight.actualDepartureDateTime) {
-        return new Date(flight.actualDepartureDateTime)
-      } else if (flight.estimatedDepartureDateTime) {
-        return new Date(flight.estimatedDepartureDateTime)
-      } else {
-        return new Date(flight.scheduledDepartureDateTime)
+      return new Date(
+        flight.actualDepartureDateTime ||
+          flight.estimatedDepartureDateTime ||
+          flight.scheduledDepartureDateTime
+      )
+    },
+    compareValues(valueA, valueB, ascending = true) {
+      if (valueA < valueB) {
+        return ascending ? -1 : 1
       }
+      if (valueA > valueB) {
+        return ascending ? 1 : -1
+      }
+      return 0
     },
     handleSort(sortBy) {
       this.sortedAscending =
@@ -60,52 +67,33 @@ export default {
         this.allFlights.sort((a, b) => {
           const timeA = this.getDepartureTime(a)
           const timeB = this.getDepartureTime(b)
-          return this.sortedAscending ? timeA - timeB : timeB - timeA
+          return this.compareValues(timeA, timeB, this.sortedAscending)
         })
       } else {
-        if (sortBy === "cityName") {
-          this.allFlights.sort((a, b) => {
-            const cityA = a.arrivalAirport?.name.toLowerCase()
-            const cityB = b.arrivalAirport?.name.toLowerCase()
-            if (cityA < cityB) {
-              return this.sortedAscending ? -1 : 1
-            }
-            if (cityA > cityB) {
-              return this.sortedAscending ? 1 : -1
-            }
-            return 0
-          })
-        } else if (sortBy === "airline") {
-          this.allFlights.sort((a, b) => {
-            const airlineA = a.airline?.name.toLowerCase()
-            const airlineB = b.airline?.name.toLowerCase()
-            if (airlineA < airlineB) {
-              return this.sortedAscending ? -1 : 1
-            }
-            if (airlineA > airlineB) {
-              return this.sortedAscending ? 1 : -1
-            }
-            return 0
-          })
-        } else if (sortBy === "gate") {
-          this.allFlights.sort((a, b) => {
-            const gateA = a.departureGate?.number
-            const gateB = b.departureGate?.number
-            return this.sortedAscending ? gateA - gateB : gateB - gateA
-          })
-        } else if (sortBy === "status") {
-          this.allFlights.sort((a, b) => {
-            const statusA = a.status.toLowerCase()
-            const statusB = b.status.toLowerCase()
-            if (statusA < statusB) {
-              return this.sortedAscending ? -1 : 1
-            }
-            if (statusA > statusB) {
-              return this.sortedAscending ? 1 : -1
-            }
-            return 0
-          })
-        }
+        this.allFlights.sort((a, b) => {
+          let valueA, valueB
+          switch (sortBy) {
+            case "cityName":
+              valueA = a.arrivalAirport?.name.toLowerCase()
+              valueB = b.arrivalAirport?.name.toLowerCase()
+              break
+            case "airline":
+              valueA = a.airline?.name.toLowerCase()
+              valueB = b.airline?.name.toLowerCase()
+              break
+            case "gate":
+              valueA = a.departureGate?.number
+              valueB = b.departureGate?.number
+              break
+            case "status":
+              valueA = a.status.toLowerCase()
+              valueB = b.status.toLowerCase()
+              break
+            default:
+              break
+          }
+          return this.compareValues(valueA, valueB, this.sortedAscending)
+        })
       }
     },
   },
