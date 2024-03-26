@@ -81,10 +81,6 @@ export default {
               valueA = a.airline?.name.toLowerCase()
               valueB = b.airline?.name.toLowerCase()
               break
-            case "gate":
-              valueA = a.departureGate?.number
-              valueB = b.departureGate?.number
-              break
             case "status":
               valueA = a.status.toLowerCase()
               valueB = b.status.toLowerCase()
@@ -153,20 +149,7 @@ export default {
               </span>
             </span>
           </th>
-          <th @click="handleSort('gate')" class="clickable">
-            <span class="header-text-container">
-              Gate<span v-if="sortedAccordingTo === 'gate'">
-                <font-awesome-icon
-                  :icon="
-                    sortedAscending
-                      ? 'fa-solid fa-caret-up'
-                      : 'fa-solid fa-caret-down'
-                  "
-                  class="sort-icon"
-                />
-              </span>
-            </span>
-          </th>
+          <th>Gate</th>
           <th @click="handleSort('status')" class="clickable">
             <span class="header-text-container">
               Status<span v-if="sortedAccordingTo === 'status'">

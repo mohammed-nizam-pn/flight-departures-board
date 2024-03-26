@@ -22,6 +22,7 @@
       height: 2rem;
       tr th {
         padding: 1rem 0 1rem 4rem;
+        cursor: default;
         &:first-of-type {
           border-top-left-radius: 0.6rem;
           border-bottom-left-radius: 0.6rem;
