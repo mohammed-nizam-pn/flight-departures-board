@@ -46,6 +46,11 @@ export default {
     this.scrollToUpdateFlightStatus()
   },
   watch: {
+    selectedFlight: {
+      handler() {
+        this.selectedStatus = ""
+      },
+    },
     selectedStatus: {
       immediate: true,
       handler(newStatus) {
