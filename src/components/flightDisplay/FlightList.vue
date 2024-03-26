@@ -17,8 +17,7 @@ export default {
     }
   },
   methods: {
-    handleFlightClick(flight, index) {
-      flight.id = index
+    handleFlightClick(flight) {
       this.$emit("flight-click", flight)
     },
     getStatusIcon(flight) {
@@ -40,13 +39,6 @@ export default {
       }
 
       return { iconClass, backgroundColorClass }
-    },
-    getDepartureTime(flight) {
-      return new Date(
-        flight.actualDepartureDateTime ||
-          flight.estimatedDepartureDateTime ||
-          flight.scheduledDepartureDateTime
-      )
     },
     compareValues(valueA, valueB, ascending = true) {
       if (valueA < valueB) {
@@ -170,7 +162,7 @@ export default {
         <tr
           v-for="(flight, index) in allFlights"
           :key="index"
-          @click="handleFlightClick(flight, index)"
+          @click="handleFlightClick(flight)"
           :class="'flight-' + index + (shouldAnimateUpdate ? ' animate' : '')"
         >
           <td :class="'time' + (shouldAnimateUpdate ? ' animate' : '')">

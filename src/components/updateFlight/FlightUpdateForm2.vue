@@ -33,13 +33,23 @@ export default {
               ? this.customStatus
               : this.selectedStatus,
           divertedCity: this.divertedToCity,
+          filteredIndex: this.selectedFlight.postFilterIndex,
         }
-        if (
-          updatedFlightData.status &&
-          updatedFlightData.status !== this.selectedFlight?.status
-        ) {
-          this.resetFormFields()
-          this.$emit("update-flight", updatedFlightData)
+        if (updatedFlightData.status) {
+          if (updatedFlightData.status !== this.selectedFlight?.status) {
+            this.resetFormFields()
+            this.$emit("update-flight", updatedFlightData)
+          } else if (updatedFlightData.status === "Diverted") {
+            if (
+              updatedFlightData.divertedCity !==
+              this.selectedFlight?.divertedCity
+            ) {
+              this.resetFormFields()
+              this.$emit("update-flight", updatedFlightData)
+            } else {
+              alert("Status not changed. Please provide a new value to update.")
+            }
+          }
         } else {
           alert("Status not changed. Please provide a new value to update.")
         }
@@ -58,16 +68,7 @@ export default {
       this.selectedFlightNumber = ""
       this.selectedStatus = ""
       this.customStatus = ""
-      this.filteredFlights = [...this.allFlights]
-    },
-    getDepartureTime(flight) {
-      if (flight.actualDepartureDateTime) {
-        return flight.actualDepartureDateTime
-      } else if (flight.estimatedDepartureDateTime) {
-        return flight.estimatedDepartureDateTime
-      } else {
-        return flight.scheduledDepartureDateTime
-      }
+      ;(this.filteredFlights = [...this.allFlights]), (this.divertedToCity = "")
     },
   },
   mixins: [timeMixin],
@@ -102,10 +103,8 @@ export default {
     allFlights: {
       immediate: true,
       handler(newFlights) {
-        newFlights.forEach((flight, index) => {
-          flight.id = index
-        })
         this.filteredFlights = [...newFlights]
+        this.selectedDestination = ""
       },
     },
     selectedDestination: {
@@ -144,6 +143,8 @@ export default {
       handler(newFilteredFlights) {
         if (newFilteredFlights.length === 1) {
           this.selectedFlight = newFilteredFlights[0]
+          this.selectedDestination =
+            newFilteredFlights[0].arrivalAirport.cityName
         } else {
           this.selectedFlight = {}
         }

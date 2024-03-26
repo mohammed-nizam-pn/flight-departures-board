@@ -26,6 +26,7 @@ export default {
             ? this.customStatus
             : this.selectedStatus,
         divertedCity: this.divertedToCity,
+        filteredIndex: this.selectedFlight.postFilterIndex,
       }
       this.$emit("update-flight", updatedFlightData)
     },

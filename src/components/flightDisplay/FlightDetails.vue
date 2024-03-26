@@ -7,6 +7,7 @@ import FlightList from "@/components/flightDisplay/FlightList.vue"
 import FlightUpdateForm from "@/components/updateFlight/FlightUpdateForm.vue"
 import FlightUpdateForm2 from "@/components/updateFlight/FlightUpdateForm2.vue"
 import { fetchFlightData } from "@/services/FlightDataService"
+import { timeMixin } from "../../mixins/timeMixin"
 
 export default {
   data: function () {
@@ -19,6 +20,10 @@ export default {
       selectedFlight: null,
       showScrollButtonUp: false,
       showScrollButtonDown: true,
+      showFilter: false,
+      selectedCountries: [],
+      filterApplied: false,
+      flightsBeforeFilter: [],
     }
   },
   components: {
@@ -33,12 +38,27 @@ export default {
     try {
       this.flightData = await fetchFlightData()
       this.noData = this.flightData.length === 0
+      this.flightData.forEach((flight, index) => {
+        flight.id = index
+        flight.postFilterIndex = index
+      })
     } catch (error) {
       this.errored = true
     } finally {
       this.loading = false
     }
   },
+  watch: {
+    flightData: {
+      immediate: true,
+      handler() {
+        this.flightData.forEach((flight, index) => {
+          flight.postFilterIndex = index
+        })
+      },
+    },
+  },
+  mixins: [timeMixin],
   methods: {
     showUpdateForm(flight) {
       this.selectedFlight = flight
@@ -46,42 +66,47 @@ export default {
     },
     updateFlight(updatedFlightDetails) {
       const index = updatedFlightDetails.flightId
-      if (
-        updatedFlightDetails.status !== "" &&
-        index >= 0 &&
-        index < this.flightData.length
-      ) {
+      const currentFlightData = this.flightsBeforeFilter.length
+        ? this.flightsBeforeFilter
+        : this.flightData
+      if (updatedFlightDetails.status !== "" && index >= 0) {
         const isStatusChanged =
-          updatedFlightDetails.status !== this.flightData[index].status
+          updatedFlightDetails.status !== currentFlightData[index].status
         const isDiverted = updatedFlightDetails.status === "Diverted"
         const isDivertedCityChanged =
           updatedFlightDetails.divertedCity !==
-            this.flightData[index]?.divertedCity &&
+            currentFlightData[index]?.divertedCity &&
           updatedFlightDetails.divertedCity !== ""
 
         if (isStatusChanged || (isDiverted && isDivertedCityChanged)) {
           const updatedFlight = {
-            ...this.flightData[index],
+            ...currentFlightData[index],
             status: updatedFlightDetails.status,
             divertedCity: isDiverted ? updatedFlightDetails.divertedCity : "",
           }
           this.showForm = false
+          const filteredIndex = updatedFlightDetails.filteredIndex
           const selectedFlightElement =
-            index === 0
+            filteredIndex === 0
               ? this.$el.querySelector("table > thead")
               : this.$el.querySelector(
-                  `.flight-${index > 0 ? index - 1 : index}`
+                  `.flight-${
+                    filteredIndex > 0 ? filteredIndex - 1 : filteredIndex
+                  }`
                 )
-
           if (selectedFlightElement)
             selectedFlightElement.scrollIntoView({ behavior: "smooth" })
 
           setTimeout(() => {
-            this.flightData.splice(index, 1, updatedFlight)
+            if (this.flightsBeforeFilter.length) {
+              this.flightsBeforeFilter.splice(index, 1, updatedFlight)
+              this.flightData.splice(filteredIndex, 1, updatedFlight)
+            } else {
+              this.flightData.splice(index, 1, updatedFlight)
+            }
             const tdElements = document.querySelectorAll(
-              `.flight-list table tbody tr.flight-${index} td`
+              `.flight-list table tbody tr.flight-${filteredIndex} td`
             )
-
             tdElements.forEach((td) => {
               td.classList.add("animate")
             })
@@ -129,6 +154,35 @@ export default {
         behavior: "smooth",
       })
     },
+    toggleFilter() {
+      this.showFilter = !this.showFilter
+    },
+    applyFilter() {
+      if (this.selectedCountries.length > 0) {
+        this.flightsBeforeFilter = this.flightData
+        this.flightData = this.flightData.filter((flight) =>
+          this.selectedCountries.includes(flight.arrivalAirport.countryName)
+        )
+        this.filterApplied = true
+      }
+      this.showFilter = false // Hide filter options after applying filter
+    },
+    removeFilter() {
+      // Reset flightData to original data
+      this.flightData = this.flightsBeforeFilter
+      this.selectedCountries = []
+      this.flightsBeforeFilter = []
+      this.filterApplied = false
+    },
+  },
+  computed: {
+    uniqueCountries() {
+      return [
+        ...new Set(
+          this.flightData.map((flight) => flight.arrivalAirport.countryName)
+        ),
+      ]
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll)
@@ -148,6 +202,23 @@ export default {
       <div v-if="errored"><errorMessage></errorMessage></div>
       <div v-if="noData && !loading && !errored">
         <dataUnavailable></dataUnavailable>
+      </div>
+      <div class="filter-container">
+        <button @click="toggleFilter">Filter By Country</button>
+        <div v-if="showFilter" class="filter-options">
+          <div v-for="country in uniqueCountries" :key="country">
+            <input
+              type="checkbox"
+              :value="country"
+              v-model="selectedCountries"
+            />
+            <label>{{ country }}</label>
+          </div>
+          <button @click="applyFilter">Apply Filter</button>
+        </div>
+        <div v-if="filterApplied">
+          <button @click="removeFilter">Remove Filter</button>
+        </div>
       </div>
       <flightList
         v-if="!loading && !errored && !noData"

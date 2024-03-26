@@ -11,5 +11,14 @@ export const timeMixin = {
       }
       return ""
     },
+    getDepartureTime(flight) {
+      if (flight.actualDepartureDateTime) {
+        return new Date(flight.actualDepartureDateTime)
+      } else if (flight.estimatedDepartureDateTime) {
+        return new Date(flight.estimatedDepartureDateTime)
+      } else {
+        return new Date(flight.scheduledDepartureDateTime)
+      }
+    },
   },
 }
