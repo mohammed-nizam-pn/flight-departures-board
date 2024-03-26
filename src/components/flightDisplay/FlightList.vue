@@ -58,15 +58,15 @@ export default {
 
       if (sortBy === "time") {
         this.allFlights.sort((a, b) => {
-          const timeA = getDepartureTime(a)
-          const timeB = getDepartureTime(b)
+          const timeA = this.getDepartureTime(a)
+          const timeB = this.getDepartureTime(b)
           return this.sortedAscending ? timeA - timeB : timeB - timeA
         })
       } else {
         if (sortBy === "cityName") {
           this.allFlights.sort((a, b) => {
-            const cityA = a.flight.arrivalAirport.name.toLowerCase()
-            const cityB = b.flight.arrivalAirport.name.toLowerCase()
+            const cityA = a.arrivalAirport?.name.toLowerCase()
+            const cityB = b.arrivalAirport?.name.toLowerCase()
             if (cityA < cityB) {
               return this.sortedAscending ? -1 : 1
             }
@@ -77,8 +77,8 @@ export default {
           })
         } else if (sortBy === "airline") {
           this.allFlights.sort((a, b) => {
-            const airlineA = a.flight.airline.name.toLowerCase()
-            const airlineB = b.flight.airline.name.toLowerCase()
+            const airlineA = a.airline?.name.toLowerCase()
+            const airlineB = b.airline?.name.toLowerCase()
             if (airlineA < airlineB) {
               return this.sortedAscending ? -1 : 1
             }
@@ -89,14 +89,14 @@ export default {
           })
         } else if (sortBy === "gate") {
           this.allFlights.sort((a, b) => {
-            const gateA = a.flight.departureGate.number
-            const gateB = b.flight.departureGate.number
+            const gateA = a.departureGate?.number
+            const gateB = b.departureGate?.number
             return this.sortedAscending ? gateA - gateB : gateB - gateA
           })
         } else if (sortBy === "status") {
           this.allFlights.sort((a, b) => {
-            const statusA = a.flight.status.toLowerCase()
-            const statusB = b.flight.status.toLowerCase()
+            const statusA = a.status.toLowerCase()
+            const statusB = b.status.toLowerCase()
             if (statusA < statusB) {
               return this.sortedAscending ? -1 : 1
             }
