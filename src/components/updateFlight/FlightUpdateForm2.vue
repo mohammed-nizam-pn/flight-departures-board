@@ -19,6 +19,8 @@ export default {
       selectedStatus: "",
       customStatus: "",
       filteredFlights: [],
+      statusIsDiverted: false,
+      divertedToCity: "",
     }
   },
   methods: {
@@ -30,6 +32,7 @@ export default {
             this.selectedStatus === "Custom Status"
               ? this.customStatus
               : this.selectedStatus,
+          divertedCity: this.divertedToCity,
         }
         if (
           updatedFlightData.status &&
@@ -140,6 +143,12 @@ export default {
         } else {
           this.selectedFlight = {}
         }
+      },
+    },
+    selectedStatus: {
+      immediate: true,
+      handler(newStatus) {
+        this.statusIsDiverted = newStatus === "Diverted"
       },
     },
   },
@@ -317,6 +326,13 @@ export default {
           v-model="customStatus"
           placeholder="Enter Custom Status Text"
         ></textarea>
+        <input
+          type="text"
+          class="diverted-to"
+          placeholder="Please enter city of diversion"
+          v-if="statusIsDiverted"
+          v-model="divertedToCity"
+        />
       </div>
       <div class="button-container">
         <button type="submit">Update</button>

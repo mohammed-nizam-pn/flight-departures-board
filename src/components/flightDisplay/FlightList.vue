@@ -77,7 +77,12 @@ export default {
               'destination-airport' + (shouldAnimateUpdate ? ' animate' : '')
             "
           >
-            {{ flight.arrivalAirport?.cityName }}
+            <span :class="flight?.divertedCity ? 'strike' : ''">{{
+              flight.arrivalAirport?.cityName
+            }}</span
+            ><br /><span v-if="flight?.divertedCity !== ''">{{
+              flight?.divertedCity
+            }}</span>
           </td>
           <td
             :class="
@@ -85,7 +90,9 @@ export default {
               (shouldAnimateUpdate ? ' animate' : '')
             "
           >
-            {{ flight.arrivalAirport?.code }}
+            <span :class="flight?.divertedCity ? ' strike' : ''">{{
+              flight.arrivalAirport?.code
+            }}</span>
           </td>
           <td :class="'airline' + (shouldAnimateUpdate ? ' animate' : '')">
             {{ flight.airline?.name }}

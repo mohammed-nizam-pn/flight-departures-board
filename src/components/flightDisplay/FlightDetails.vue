@@ -49,35 +49,52 @@ export default {
       if (
         updatedFlightDetails.status !== "" &&
         index >= 0 &&
-        index < this.flightData.length &&
-        updatedFlightDetails.status !== this.flightData[index].status
+        index < this.flightData.length
       ) {
-        const updatedFlight = {
-          ...this.flightData[index],
-          status: updatedFlightDetails.status,
-        }
-        this.showForm = false
-        const selectedFlightElement =
-          index === 0
-            ? this.$el.querySelector("table > thead")
-            : this.$el.querySelector(`.flight-${index > 0 ? index - 1 : index}`)
-        if (selectedFlightElement) {
-          selectedFlightElement.scrollIntoView({ behavior: "smooth" })
-        }
-        setTimeout(() => {
-          this.flightData.splice(index, 1, updatedFlight)
-          const tdElements = document.querySelectorAll(
-            ".flight-list table tbody tr.flight-" + index + " td"
-          )
-          tdElements.forEach((td) => {
-            td.classList.add("animate")
-          })
+        const isStatusChanged =
+          updatedFlightDetails.status !== this.flightData[index].status
+        const isDiverted = updatedFlightDetails.status === "Diverted"
+        const isDivertedCityChanged =
+          updatedFlightDetails.divertedCity !==
+            this.flightData[index]?.divertedCity &&
+          updatedFlightDetails.divertedCity !== ""
+
+        if (isStatusChanged || (isDiverted && isDivertedCityChanged)) {
+          const updatedFlight = {
+            ...this.flightData[index],
+            status: updatedFlightDetails.status,
+            divertedCity: isDiverted ? updatedFlightDetails.divertedCity : "",
+          }
+          this.showForm = false
+          const selectedFlightElement =
+            index === 0
+              ? this.$el.querySelector("table > thead")
+              : this.$el.querySelector(
+                  `.flight-${index > 0 ? index - 1 : index}`
+                )
+
+          if (selectedFlightElement)
+            selectedFlightElement.scrollIntoView({ behavior: "smooth" })
+
           setTimeout(() => {
+            this.flightData.splice(index, 1, updatedFlight)
+            const tdElements = document.querySelectorAll(
+              `.flight-list table tbody tr.flight-${index} td`
+            )
+
             tdElements.forEach((td) => {
-              td.classList.remove("animate")
+              td.classList.add("animate")
             })
-          }, 700)
-        }, 500)
+
+            setTimeout(() => {
+              tdElements.forEach((td) => {
+                td.classList.remove("animate")
+              })
+            }, 700)
+          }, 500)
+        } else {
+          alert("Status not changed. Please provide a new value to update.")
+        }
       } else {
         alert("Status not changed. Please provide a new value to update.")
       }

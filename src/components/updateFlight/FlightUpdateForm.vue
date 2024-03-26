@@ -13,6 +13,8 @@ export default {
     return {
       selectedStatus: "",
       customStatus: "",
+      statusIsDiverted: false,
+      divertedToCity: "",
     }
   },
   methods: {
@@ -23,6 +25,7 @@ export default {
           this.selectedStatus === "Custom Status"
             ? this.customStatus
             : this.selectedStatus,
+        divertedCity: this.divertedToCity,
       }
       this.$emit("update-flight", updatedFlightData)
     },
@@ -41,6 +44,14 @@ export default {
   mixins: [timeMixin],
   mounted() {
     this.scrollToUpdateFlightStatus()
+  },
+  watch: {
+    selectedStatus: {
+      immediate: true,
+      handler(newStatus) {
+        this.statusIsDiverted = newStatus === "Diverted"
+      },
+    },
   },
 }
 </script>
@@ -102,6 +113,13 @@ export default {
               v-model="customStatus"
               placeholder="Enter Custom Status Text"
             ></textarea>
+            <input
+              type="text"
+              class="diverted-to"
+              placeholder="Please enter city of diversion"
+              v-if="statusIsDiverted"
+              v-model="divertedToCity"
+            />
           </div>
         </div>
       </div>

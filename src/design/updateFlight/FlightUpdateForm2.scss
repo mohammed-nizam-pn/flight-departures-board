@@ -107,7 +107,8 @@
         }
       }
     }
-    textarea {
+    textarea,
+    .diverted-to {
       padding: 0.4rem;
       color: #dfc42e;
       background: transparent;
@@ -117,6 +118,7 @@
       border-radius: 0.4rem;
       resize: none;
     }
+
     .destination-select,
     .airline-select,
     .time-select {
