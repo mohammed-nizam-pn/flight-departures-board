@@ -35,15 +35,7 @@ export default {
           updatedFlightData.status &&
           updatedFlightData.status !== this.selectedFlight?.status
         ) {
-          this.selectedFlight = {}
-          this.selectedDestination = ""
-          this.selectedAirline = ""
-          this.selectedTime = ""
-          this.selectedFlightNumber = ""
-          this.selectedFlightNumber = ""
-          this.selectedStatus = ""
-          this.customStatus = ""
-          this.filteredFlights = [...this.allFlights]
+          this.resetFormFields()
           this.$emit("update-flight", updatedFlightData)
         } else {
           alert("Status not changed. Please provide a new value to update.")
@@ -53,11 +45,13 @@ export default {
       }
     },
     handleReset() {
+      this.resetFormFields()
+    },
+    resetFormFields() {
       this.selectedFlight = {}
       this.selectedDestination = ""
       this.selectedAirline = ""
       this.selectedTime = ""
-      this.selectedFlightNumber = ""
       this.selectedFlightNumber = ""
       this.selectedStatus = ""
       this.customStatus = ""
