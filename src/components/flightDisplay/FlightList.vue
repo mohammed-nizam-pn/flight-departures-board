@@ -41,8 +41,72 @@ export default {
 
       return { iconClass, backgroundColorClass }
     },
+    getDepartureTime(flight) {
+      if (flight.actualDepartureDateTime) {
+        return new Date(flight.actualDepartureDateTime)
+      } else if (flight.estimatedDepartureDateTime) {
+        return new Date(flight.estimatedDepartureDateTime)
+      } else {
+        return new Date(flight.scheduledDepartureDateTime)
+      }
+    },
     handleSort(sortBy) {
-      console.log(sortBy)
+      this.sortedAscending =
+        this.sortedAccordingTo === sortBy ? !this.sortedAscending : true
+      this.sortedAccordingTo =
+        this.sortedAccordingTo === sortBy ? this.sortedAccordingTo : sortBy
+
+      if (sortBy === "time") {
+        this.allFlights.sort((a, b) => {
+          const timeA = getDepartureTime(a)
+          const timeB = getDepartureTime(b)
+          return this.sortedAscending ? timeA - timeB : timeB - timeA
+        })
+      } else {
+        if (sortBy === "cityName") {
+          this.allFlights.sort((a, b) => {
+            const cityA = a.flight.arrivalAirport.name.toLowerCase()
+            const cityB = b.flight.arrivalAirport.name.toLowerCase()
+            if (cityA < cityB) {
+              return this.sortedAscending ? -1 : 1
+            }
+            if (cityA > cityB) {
+              return this.sortedAscending ? 1 : -1
+            }
+            return 0
+          })
+        } else if (sortBy === "airline") {
+          this.allFlights.sort((a, b) => {
+            const airlineA = a.flight.airline.name.toLowerCase()
+            const airlineB = b.flight.airline.name.toLowerCase()
+            if (airlineA < airlineB) {
+              return this.sortedAscending ? -1 : 1
+            }
+            if (airlineA > airlineB) {
+              return this.sortedAscending ? 1 : -1
+            }
+            return 0
+          })
+        } else if (sortBy === "gate") {
+          this.allFlights.sort((a, b) => {
+            const gateA = a.flight.departureGate.number
+            const gateB = b.flight.departureGate.number
+            return this.sortedAscending ? gateA - gateB : gateB - gateA
+          })
+        } else if (sortBy === "status") {
+          this.allFlights.sort((a, b) => {
+            const statusA = a.flight.status.toLowerCase()
+            const statusB = b.flight.status.toLowerCase()
+            if (statusA < statusB) {
+              return this.sortedAscending ? -1 : 1
+            }
+            if (statusA > statusB) {
+              return this.sortedAscending ? 1 : -1
+            }
+            return 0
+          })
+        }
+      }
     },
   },
   mixins: [timeMixin],
@@ -59,7 +123,7 @@ export default {
     <table>
       <thead>
         <tr>
-          <th @click="handleSort('time')">
+          <th @click="handleSort('time')" class="clickable">
             Departure Time<span v-if="sortedAccordingTo === 'time'">
               <font-awesome-icon
                 :icon="
@@ -67,10 +131,11 @@ export default {
                     ? 'fa-solid fa-caret-up'
                     : 'fa-solid fa-caret-down'
                 "
+                class="sort-icon"
               />
             </span>
           </th>
-          <th @click="handleSort('cityName')">
+          <th @click="handleSort('cityName')" class="clickable">
             City Name<span v-if="sortedAccordingTo === 'cityName'">
               <font-awesome-icon
                 :icon="
@@ -78,11 +143,12 @@ export default {
                     ? 'fa-solid fa-caret-up'
                     : 'fa-solid fa-caret-down'
                 "
+                class="sort-icon"
               />
             </span>
           </th>
           <th>Code</th>
-          <th @click="handleSort('airline')">
+          <th @click="handleSort('airline')" class="clickable">
             Airline<span v-if="sortedAccordingTo === 'airline'">
               <font-awesome-icon
                 :icon="
@@ -90,10 +156,11 @@ export default {
                     ? 'fa-solid fa-caret-up'
                     : 'fa-solid fa-caret-down'
                 "
+                class="sort-icon"
               />
             </span>
           </th>
-          <th @click="handleSort('gate')">
+          <th @click="handleSort('gate')" class="clickable">
             Gate<span v-if="sortedAccordingTo === 'gate'">
               <font-awesome-icon
                 :icon="
@@ -101,10 +168,11 @@ export default {
                     ? 'fa-solid fa-caret-up'
                     : 'fa-solid fa-caret-down'
                 "
+                class="sort-icon"
               />
             </span>
           </th>
-          <th @click="handleSort('status')">
+          <th @click="handleSort('status')" class="clickable">
             Status<span v-if="sortedAccordingTo === 'status'">
               <font-awesome-icon
                 :icon="
@@ -112,6 +180,7 @@ export default {
                     ? 'fa-solid fa-caret-up'
                     : 'fa-solid fa-caret-down'
                 "
+                class="sort-icon"
               />
             </span>
           </th>

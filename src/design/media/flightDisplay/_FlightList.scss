@@ -10,9 +10,6 @@
         font-size: 0.8rem;
         height: 2rem;
         tr th {
-          &:first-of-type::after {
-            content: "";
-          }
           padding: 0;
           padding-left: 0.4rem;
         }
@@ -75,9 +72,6 @@
         font-size: 0.85rem;
         height: 2.5rem;
         tr th {
-          &:first-of-type::after {
-            content: " Time";
-          }
           padding: 0;
           padding-left: 0.5rem;
         }
@@ -120,9 +114,6 @@
         font-size: 0.8rem;
         height: 2.5rem;
         tr th {
-          &:first-of-type::after {
-            content: " Time";
-          }
           padding: 0;
           padding-left: 3rem;
         }

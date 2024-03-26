@@ -22,7 +22,6 @@
       height: 2rem;
       tr th {
         padding: 1rem 0 1rem 4rem;
-        cursor: pointer;
         &:first-of-type {
           border-top-left-radius: 0.6rem;
           border-bottom-left-radius: 0.6rem;
@@ -30,6 +29,12 @@
         &:last-of-type {
           border-top-right-radius: 0.6rem;
           border-bottom-right-radius: 0.6rem;
+        }
+        &.clickable {
+          cursor: pointer;
+          .sort-icon {
+            padding-left: 0.5rem;
+          }
         }
       }
     }
