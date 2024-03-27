@@ -6,6 +6,7 @@ import LoadingAnimation from "@/components/flightDisplay/LoadingAnimation.vue"
 import FlightList from "@/components/flightDisplay/FlightList.vue"
 import FlightUpdateForm from "@/components/updateFlight/FlightUpdateForm.vue"
 import FlightUpdateForm2 from "@/components/updateFlight/FlightUpdateForm2.vue"
+import { fetchFlightData } from "../../services/FlightDataService"
 
 export default {
   data: function () {
@@ -38,6 +39,7 @@ export default {
         JSON.stringify(this.flightData[0]) === "{}"
     } catch (error) {
       this.errored = true
+      console.log("FlightDetails.vue - Error when fetching data: " + error)
     } finally {
       this.loading = false
     }
