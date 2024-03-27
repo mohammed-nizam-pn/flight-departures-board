@@ -33,8 +33,8 @@ This project is a flight departures board web application built using Vue.js v2.
 - [**Vue.js:**](https://v2.vuejs.org/) Frontend framework for building SPAs.
 - [**Axios:**](https://v2.vuejs.org/v2/cookbook/using-axios-to-consume-apis.html?redirect=true) HTTP client for API calls.
 - [**Font Awesome Icons:**](https://fontawesome.com/start) Provides a library of icons for UI elements.
-- **SCSS:** CSS preprocessor for styling.
 - [**Autoprefixer:**](https://github.com/postcss/autoprefixer) Adds vendor prefixes for cross-browser compatibility.
+- **SCSS:** CSS preprocessor for styling.
 
 ## Testing 🧪
 
