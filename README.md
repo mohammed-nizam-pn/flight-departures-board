@@ -48,6 +48,8 @@ Testing has been attempted using various frameworks (Jest, Vitest, Cypress), but
 - **Resolve Dependency Issues:** Address dependency issues with Vue Router and other packages.
 - **Refactor Code:** Consolidate forms and reusable code for better organization.
 - **Additional Features:** Implement features like favoriting flights and bulk status updates.
+- **SEO Integration:** Improve the discoverability of app by implementing SEO features such as meta tags and optimized page titles.
+- **Accessibility Enhancements:** Make app more user-friendly for everyone, including those with disabilities, by using semantic HTML tags, ARIA attributes, and enabling keyboard navigation.
 
 ## Contributing 🤝
 
