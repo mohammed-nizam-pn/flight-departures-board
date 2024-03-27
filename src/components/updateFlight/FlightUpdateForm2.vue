@@ -154,6 +154,17 @@ export default {
       },
     },
 
+    selectedFlightNumber: {
+      immediate: true,
+      handler(newFlightNumber) {
+        if (newFlightNumber) {
+          this.filteredFlights = this.filteredFlights.filter(
+            (flight) => flight.flightNumber === newFlightNumber
+          )
+        }
+      },
+    },
+
     filteredFlights: {
       immediate: true,
       handler(newFilteredFlights) {
