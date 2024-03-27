@@ -207,17 +207,6 @@ export default {
       </div>
       <div class="filter-container" v-if="!loading && !errored && !noData">
         <div class="filter-button-container">
-          <div
-            class="selected-countries-container"
-            v-if="selectedCountries.length && filterApplied"
-          >
-            <span
-              class="selected-country"
-              v-for="country in selectedCountries"
-              :key="country"
-              >{{ country }}</span
-            >
-          </div>
           <div class="buttons">
             <button
               @click="toggleFilter"
@@ -251,6 +240,17 @@ export default {
                 <font-awesome-icon icon="fa-solid fa-filter-circle-xmark"
               /></span>
             </button>
+          </div>
+          <div
+            class="selected-countries-container"
+            v-if="selectedCountries.length && filterApplied"
+          >
+            <span
+              class="selected-country"
+              v-for="country in selectedCountries"
+              :key="country"
+              >{{ country }}</span
+            >
           </div>
         </div>
         <div class="filter-options-container" v-if="showOptions">
