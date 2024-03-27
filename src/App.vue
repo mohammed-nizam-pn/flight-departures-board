@@ -6,7 +6,9 @@ import FlightDetails from "@/components/flightDisplay/FlightDetails.vue"
 export default {
   name: App,
   data: function () {
-    return {}
+    return {
+      name: "App",
+    }
   },
   components: {
     appHeader: Header,

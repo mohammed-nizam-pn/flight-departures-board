@@ -1,6 +1,6 @@
 import { timeMixin } from "@/mixins/timeMixin.js"
 
-describe("timeMixin", () => {
+describe("timeMixin.js", () => {
   it("should format time correctly", () => {
     const testDateTime = "2022-08-22T10:51:00"
     const expectedResult = "10.51"
