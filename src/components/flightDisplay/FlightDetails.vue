@@ -6,7 +6,6 @@ import LoadingAnimation from "@/components/flightDisplay/LoadingAnimation.vue"
 import FlightList from "@/components/flightDisplay/FlightList.vue"
 import FlightUpdateForm from "@/components/updateFlight/FlightUpdateForm.vue"
 import FlightUpdateForm2 from "@/components/updateFlight/FlightUpdateForm2.vue"
-import { fetchFlightData } from "@/services/FlightDataService"
 
 export default {
   data: function () {
@@ -34,7 +33,9 @@ export default {
   async created() {
     try {
       this.flightData = await fetchFlightData()
-      this.noData = this.flightData.length === 0
+      this.noData =
+        this.flightData?.length === 0 ||
+        JSON.stringify(this.flightData[0]) === "{}"
     } catch (error) {
       this.errored = true
     } finally {
@@ -54,7 +55,7 @@ export default {
       if (
         updatedFlightDetails.status !== "" &&
         index >= 0 &&
-        index < this.flightData.length &&
+        index < this.flightData?.length &&
         updatedFlightDetails.status !== this.flightData[index].status
       ) {
         const updatedFlight = {
@@ -174,7 +175,7 @@ export default {
       <font-awesome-icon icon="fa-solid fa-arrow-up" class="scroll-top-icon" />
     </div>
     <div
-      v-if="showScrollButtonDown && flightData.length"
+      v-if="showScrollButtonDown && flightData?.length"
       class="scroll-down-button"
       @click="scrollToBottom"
     >

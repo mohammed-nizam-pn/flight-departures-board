@@ -81,7 +81,7 @@ export default {
       const uniqueCityNames = new Set()
 
       this.filteredFlights.forEach((flight) => {
-        uniqueCityNames.add(flight.arrivalAirport.cityName)
+        uniqueCityNames.add(flight?.arrivalAirport?.cityName)
       })
 
       return Array.from(uniqueCityNames).sort()
@@ -124,7 +124,7 @@ export default {
       handler(newDestination) {
         if (newDestination) {
           this.filteredFlights = [...this.allFlights].filter(
-            (flight) => flight.arrivalAirport.cityName === newDestination
+            (flight) => flight?.arrivalAirport?.cityName === newDestination
           )
         }
       },
