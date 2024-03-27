@@ -26,7 +26,7 @@ This project is a flight departures board web application built using Vue.js v2.
 
 ### Start the development server:
 
-`npm run dev`
+`npm start`
 
 ## Dependencies 📦
 
