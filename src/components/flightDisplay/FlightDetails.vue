@@ -162,7 +162,10 @@ export default {
           @cancel-update="cancelUpdate"
         ></flightUpdateForm>
       </div>
-      <div v-if="!showForm && !noData && !errored" class="update-form2">
+      <div
+        v-if="!showForm && !noData && !errored && !loading"
+        class="update-form2"
+      >
         <flightUpdateForm2
           :allFlights="flightData"
           @update-flight="updateFlight"
