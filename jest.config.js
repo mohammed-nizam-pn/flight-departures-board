@@ -6,4 +6,6 @@ module.exports = {
   moduleNameMapper: {
     "^axios$": "axios/dist/node/axios.cjs",
   },
+  collectCoverage: true,
+  collectCoverageFrom: ["**/*.{js,vue}", "!**/node_modules/**"],
 }

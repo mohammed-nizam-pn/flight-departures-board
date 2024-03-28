@@ -11,6 +11,7 @@ import { fetchFlightData } from "@/services/FlightDataService"
 export default {
   data: function () {
     return {
+      name: "FlightDetails",
       flightData: [],
       loading: true,
       errored: false,
