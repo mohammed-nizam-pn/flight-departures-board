@@ -1,5 +1,13 @@
 <script>
 import "../../design/flightDisplay/DataUnavailable.scss"
+
+export default {
+  data: function () {
+    return {
+      name: "DataUnavailable",
+    }
+  },
+}
 </script>
 
 <template>

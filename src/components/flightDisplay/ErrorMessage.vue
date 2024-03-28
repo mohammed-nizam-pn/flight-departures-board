@@ -1,5 +1,13 @@
 <script>
 import "../../design/flightDisplay/ErrorMessage.scss"
+
+export default {
+  data: function () {
+    return {
+      name: "ErrorMessage",
+    }
+  },
+}
 </script>
 
 <template>

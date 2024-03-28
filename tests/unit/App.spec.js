@@ -1,20 +1,12 @@
 import { mount } from "@vue/test-utils"
 import App from "@/App.vue"
+import Header from "@/components/Header.vue"
+import FlightDetails from "@/components/flightDisplay/FlightDetails.vue"
 
 describe("App.vue", () => {
-  const MockFontAwesomeIcon = {
-    name: "font-awesome-icon",
-    template: "<span></span>",
-  }
-  it("should render header and icon", () => {
-    const wrapper = mount(App, {
-      stubs: {
-        FontAwesomeIcon: MockFontAwesomeIcon,
-      },
-    })
-    let header = wrapper.find("#main-container")
-    expect(header.exists()).toBe(true)
-    expect(header.text()).toContain("Departures")
-    expect(wrapper.find(".icon").exists()).toBe(true)
+  it("renders the correct subcomponents", () => {
+    const wrapper = mount(App)
+    expect(wrapper.findComponent(Header).exists()).toBe(true)
+    expect(wrapper.findComponent(FlightDetails).exists()).toBe(true)
   })
 })
